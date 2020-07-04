@@ -3,9 +3,9 @@ package bmap
 import (
 	"log"
 
-	"github.com/rohenaz/bap-planaria-go/bap"
-	"github.com/rohenaz/bap-planaria-go/bob"
-	"github.com/rohenaz/bap-planaria-go/mapp"
+	"github.com/rohenaz/go-bap"
+	"github.com/rohenaz/go-bob"
+	"github.com/rohenaz/go-map"
 )
 
 // Tx is a Bmap formatted tx
