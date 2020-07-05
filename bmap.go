@@ -3,13 +3,15 @@ package bmap
 import (
 	"log"
 
+	"github.com/rohenaz/go-aip"
 	"github.com/rohenaz/go-bap"
 	"github.com/rohenaz/go-bob"
-	"github.com/rohenaz/go-map"
+	mapp "github.com/rohenaz/go-map"
 )
 
 // Tx is a Bmap formatted tx
 type Tx struct {
+	AIP *aip.Aip  `json:"AIP,omitempty" bson:"AIP,omitempty"`
 	MAP *mapp.MAP `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	BAP *bap.Data `json:"BAP,omnitempty" bson:"BAP,omitempty"`
 }
@@ -24,6 +26,10 @@ func (b *Tx) FromBob(bobTx *bob.Tx) {
 	for _, out := range bobTx.Out {
 		for _, tape := range out.Tape {
 			switch tape.Cell[0].S {
+			case aip.Prefix:
+				b.AIP = aip.New()
+				b.AIP.FromTape(tape)
+				break
 			case bap.BapPrefix:
 				log.Println(tape.Cell[0].S)
 				// Detect the type
