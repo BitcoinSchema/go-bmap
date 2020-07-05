@@ -27,15 +27,12 @@ func (b *Tx) FromBob(bobTx *bob.Tx) {
 			case aip.Prefix:
 				b.AIP = aip.New()
 				b.AIP.FromTape(tape)
-				break
 			case bap.Prefix:
 				b.BAP = bap.New()
 				b.BAP.FromTape(tape)
-				break
 			case mapp.Prefix:
 				b.MAP = mapp.New()
 				b.MAP.FromTape(tape)
-				break
 			}
 		}
 	}
