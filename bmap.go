@@ -28,7 +28,7 @@ func (b *Tx) FromBob(bobTx *bob.Tx) {
 				b.AIP = aip.New()
 				b.AIP.FromTape(tape)
 				break
-			case bap.BapPrefix:
+			case bap.Prefix:
 				b.BAP = bap.New()
 				b.BAP.FromTape(tape)
 				break
