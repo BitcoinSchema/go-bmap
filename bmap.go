@@ -1,8 +1,6 @@
 package bmap
 
 import (
-	"log"
-
 	"github.com/rohenaz/go-aip"
 	"github.com/rohenaz/go-bap"
 	"github.com/rohenaz/go-bob"
@@ -31,8 +29,6 @@ func (b *Tx) FromBob(bobTx *bob.Tx) {
 				b.AIP.FromTape(tape)
 				break
 			case bap.BapPrefix:
-				log.Println(tape.Cell[0].S)
-				// Detect the type
 				b.BAP = bap.New()
 				b.BAP.FromTape(tape)
 				break
