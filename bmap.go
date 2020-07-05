@@ -32,7 +32,7 @@ func (b *Tx) FromBob(bobTx *bob.Tx) {
 				b.BAP = bap.New()
 				b.BAP.FromTape(tape)
 				break
-			case mapp.MapPrefix:
+			case mapp.Prefix:
 				b.MAP = mapp.New()
 				b.MAP.FromTape(tape)
 				break
