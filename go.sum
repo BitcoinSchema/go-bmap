@@ -14,8 +14,8 @@ github.com/rohenaz/go-bap v0.0.0-20200705184720-a4a3add55561 h1:73EsvLHapMCdVtJb
 github.com/rohenaz/go-bap v0.0.0-20200705184720-a4a3add55561/go.mod h1:odXjioXnaKvOC5gROx86LIl5QjdCftrc2JjdHIEiIv0=
 github.com/rohenaz/go-bob v0.0.0-20200704190822-4b02dd80ee80 h1:lxaVlf9j6iTQ+nYA67ph7B7H/id/uJ6RIXe9F549zKE=
 github.com/rohenaz/go-bob v0.0.0-20200704190822-4b02dd80ee80/go.mod h1:YEjUooBSmI0F5qcDnyms7/xe8TdYZNcQrdQhOJ16fvY=
-github.com/rohenaz/go-map v0.0.0-20200705132236-bda646e63041 h1:Kk7taX3zb5b2h9bOJQQn3Vkkb3948FlcAzVVW0mllmI=
-github.com/rohenaz/go-map v0.0.0-20200705132236-bda646e63041/go.mod h1:sd/N7nSBxK+qkw5xHENQgSCyZArxG8sGyWZjS0EqwPk=
+github.com/rohenaz/go-map v0.0.0-20200705172609-1e20241a4e84 h1:0OXDObDWDqzwZJfem0e4almczq4H3pa1H43rNJMck7I=
+github.com/rohenaz/go-map v0.0.0-20200705172609-1e20241a4e84/go.mod h1:sd/N7nSBxK+qkw5xHENQgSCyZArxG8sGyWZjS0EqwPk=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20200406173513-056763e48d71 h1:DOmugCavvUtnUD114C1Wh+UgTgQZ4pMLzXxi1pSt+/Y=
 golang.org/x/crypto v0.0.0-20200406173513-056763e48d71/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
