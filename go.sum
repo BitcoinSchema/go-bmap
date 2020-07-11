@@ -12,6 +12,8 @@ github.com/rohenaz/go-aip v0.0.0-20200704191331-93b9f6de350a h1:xegzrrrWzU7XVcJf
 github.com/rohenaz/go-aip v0.0.0-20200704191331-93b9f6de350a/go.mod h1:fJb1D7fg5eSmr/jsUC988WvdITYUnrqmmuSt5bWfWnY=
 github.com/rohenaz/go-aip v0.0.0-20200708045848-236aebdb46b9 h1:eouu1ecBj6sVpUfkXzMliGkBd7Gir8ACYoRYNN4zO/U=
 github.com/rohenaz/go-aip v0.0.0-20200708045848-236aebdb46b9/go.mod h1:9BGXYgSPJjprIodsbAp7bgKWNbamT9xZW4UPDU+zj8A=
+github.com/rohenaz/go-b v0.0.0-20200711194719-f421af1787c0 h1:Xupf7B/D4iJjDkMv9SpUSUzaR7cdeAheaj+SjM2sIHE=
+github.com/rohenaz/go-b v0.0.0-20200711194719-f421af1787c0/go.mod h1:d+hNAjyKonnqCs9xIFIub/3eiJJq+cLZvxI4gstRBlo=
 github.com/rohenaz/go-bap v0.0.0-20200706191742-924867710d42 h1:OO5ArqHN99qACeIWrxEtTpauyGJ2ivlFMmzsmLeeIDE=
 github.com/rohenaz/go-bap v0.0.0-20200706191742-924867710d42/go.mod h1:odXjioXnaKvOC5gROx86LIl5QjdCftrc2JjdHIEiIv0=
 github.com/rohenaz/go-bap v0.0.0-20200709163034-821eefc63dfb h1:TPfr06yWFSg7lz1AQDR2NbDe+mUYmjpcbCmHQb7avZg=
