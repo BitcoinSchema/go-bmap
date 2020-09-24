@@ -29,7 +29,7 @@ func (bTx *Tx) FromBob(bobTx *bob.Tx) {
 			case aip.Prefix:
 				bTx.AIP = aip.New()
 				bTx.AIP.FromTape(tape)
-				bTx.AIP.SetData(bobTx)
+				bTx.AIP.SetData(out.Tape)
 			case bap.Prefix:
 				bTx.BAP = bap.New()
 				bTx.BAP.FromTape(tape)
