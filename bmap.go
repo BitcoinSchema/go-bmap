@@ -10,6 +10,7 @@ import (
 
 // Tx is a Bmap formatted tx
 type Tx struct {
+	bob.Tx
 	AIP *aip.Aip  `json:"AIP,omitempty" bson:"AIP,omitempty"`
 	MAP *mapp.MAP `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	BAP *bap.Data `json:"BAP,omnitempty" bson:"BAP,omitempty"`
