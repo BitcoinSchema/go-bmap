@@ -24,10 +24,15 @@ func TestFromBob(t *testing.T) {
 	bmapData := New()
 	bmapData.FromBob(bobData)
 
+	if bmapData.Tx.H != "ce7429a101b7aecdf1e5449151d0be17a3948cb5c22282832ae942107edb2272" {
+		t.Errorf("Inherited field failed %+v", bmapData)
+	}
+
 	mapData := *bmapData.MAP
 	if mapData["app"] != "2paymail" {
 		t.Errorf("Test fromBob failed %+v", mapData)
 	}
+
 }
 
 func TestMap(t *testing.T) {
