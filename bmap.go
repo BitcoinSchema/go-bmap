@@ -23,7 +23,7 @@ func New() *Tx {
 }
 
 // FromBob returns a BmapTx from a BobTx
-func (bTx *Tx) FromBob(bobTx *bob.Tx) {
+func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
 	for _, out := range bobTx.Out {
 		for _, tape := range out.Tape {
 			switch tape.Cell[0].S {
@@ -33,14 +33,15 @@ func (bTx *Tx) FromBob(bobTx *bob.Tx) {
 				bTx.AIP.SetData(out.Tape)
 			case bap.Prefix:
 				bTx.BAP = bap.New()
-				bTx.BAP.FromTape(tape)
+				err = bTx.BAP.FromTape(tape)
 			case mapp.Prefix:
 				bTx.MAP = mapp.New()
-				bTx.MAP.FromTape(tape)
+				err = bTx.MAP.FromTape(tape)
 			case b.Prefix:
 				bTx.B = b.New()
-				bTx.B.FromTape(tape)
+				err = bTx.B.FromTape(tape)
 			}
 		}
 	}
+	return nil
 }
