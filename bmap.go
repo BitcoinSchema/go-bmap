@@ -10,11 +10,14 @@ import (
 
 // Tx is a Bmap formatted tx
 type Tx struct {
-	bob.Tx
-	AIP *aip.Aip  `json:"AIP,omitempty" bson:"AIP,omitempty"`
-	MAP *mapp.MAP `json:"MAP,omitempty" bson:"MAP,omitempty"`
-	BAP *bap.Data `json:"BAP,omnitempty" bson:"BAP,omitempty"`
-	B   *b.B      `json:"B,omnitempty" bson:"B,omitempty"`
+	Blk bob.Blk      `json:"blk,omitempty" bson:"blk,omitempty"`
+	Tx  bob.TxInfo   `json:"tx,omitempty" bson:"tx,omitempty"`
+	In  []bob.Input  `json:"in,omitempty" bson:"in,omitempty"`
+	Out []bob.Output `json:"out,omitempty" bson:"out,omitempty"`
+	B   *b.B         `json:"B,omnitempty" bson:"B,omitempty"`
+	MAP *mapp.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
+	AIP *aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
+	BAP *bap.Data    `json:"BAP,omnitempty" bson:"BAP,omitempty"`
 }
 
 // New creates a new BmapTx
@@ -42,6 +45,12 @@ func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
 				err = bTx.B.FromTape(tape)
 			}
 		}
+
+		// Set inherited fields
+		bTx.Tx = bobTx.Tx
+		bTx.Blk = bobTx.Blk
+		bTx.In = bobTx.In
+		bTx.Out = bobTx.Out
 	}
 	return nil
 }
