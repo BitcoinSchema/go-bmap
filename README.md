@@ -1,6 +1,6 @@
 ## bmap-go
 
-A Go version of the [bmap js library](https://github.com/bitcoinschema/bmap/)
+A Go version of the [bmap js library](https://github.com/rohenaz/bmap/)
 
 ## Usage
 
@@ -10,7 +10,7 @@ Transform from [BOB](https://github.com/bitcoinschema/go-bob) Tx to BMAP format
 import "github.com/bitcoinschema/go-bmap"
 
 // Transform from BOB to BMAP
-bmapTx, err := bmapData.NewFromString(bobData)
+bmapTx, err := bmap.NewFromString(bobData)
 ```
 
 ## Supported protocols
