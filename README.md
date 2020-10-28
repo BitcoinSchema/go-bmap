@@ -1,24 +1,23 @@
 ## bmap-go
 
-A Go version of the [bmap js library](https://github.com/rohenaz/bmap/)
+A Go version of the [bmap js library](https://github.com/bitcoinschema/bmap/)
 
 ## Usage
 
-Transform from [BOB](https://github.com/rohenaz/go-bob) Tx to BMAP format
+Transform from [BOB](https://github.com/bitcoinschema/go-bob) Tx to BMAP format
 
 ```go
-import "github.com/rohenaz/go-bmap"
+import "github.com/bitcoinschema/go-bmap"
 
 // Transform from BOB to BMAP
-bmapData := bmap.New()
-err := bmapData.FromString(bobData)
+bmapTx, err := bmapData.NewFromString(bobData)
 ```
 
 ## Supported protocols
 
-- [AIP](https://github.com/rohenaz/go-aip)
-- [BAP](https://github.com/rohenaz/go-bap)
-- [MAP](https://github.com/rohenaz/go-map)
+- [AIP](https://github.com/bitcoinschema/go-aip)
+- [BAP](https://github.com/bitcoinschema/go-bap)
+- [MAP](https://github.com/bitcoinschema/go-map)
 
 ## Example
 

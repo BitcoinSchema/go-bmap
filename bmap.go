@@ -2,10 +2,10 @@ package bmap
 
 import (
 	"github.com/bitcoinschema/go-aip"
+	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
-	"github.com/rohenaz/go-b"
-	"github.com/rohenaz/go-bob"
-	mapp "github.com/rohenaz/go-map"
+	"github.com/bitcoinschema/go-bob"
+	magic "github.com/bitcoinschema/go-map"
 )
 
 // Tx is a Bmap formatted tx
@@ -15,7 +15,7 @@ type Tx struct {
 	In  []bob.Input  `json:"in,omitempty" bson:"in,omitempty"`
 	Out []bob.Output `json:"out,omitempty" bson:"out,omitempty"`
 	B   *b.B         `json:"B,omnitempty" bson:"B,omitempty"`
-	MAP *mapp.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
+	MAP magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	AIP *aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
 	BAP *bap.Data    `json:"BAP,omnitempty" bson:"BAP,omitempty"`
 }
@@ -25,20 +25,25 @@ func New() *Tx {
 	return &Tx{}
 }
 
+// NewFromBob returns a new BmapTx from a BobTx
+func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
+	bmapTx = New()
+	err = bmapTx.FromBob(bobTx)
+	return
+}
+
 // FromBob returns a BmapTx from a BobTx
-func (bTx *Tx) FromBob(bobTx *bob.BobTx) (err error) {
+func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
 	for _, out := range bobTx.Out {
 		for _, tape := range out.Tape {
 			switch tape.Cell[0].S {
 			case aip.Prefix:
-				bTx.AIP = aip.New()
-				bTx.AIP.FromTape(tape)
-				bTx.AIP.SetData(out.Tape)
+				bTx.AIP = aip.NewFromTape(tape)
+				bTx.AIP.SetDataFromTape(out.Tape)
 			case bap.Prefix:
 				bTx.BAP, err = bap.NewFromTape(&tape)
-			case mapp.Prefix:
-				bTx.MAP = mapp.New()
-				err = bTx.MAP.FromTape(tape)
+			case magic.Prefix:
+				bTx.MAP, err = magic.NewFromTape(&tape)
 			case b.Prefix:
 				bTx.B = b.New()
 				err = bTx.B.FromTape(tape)
