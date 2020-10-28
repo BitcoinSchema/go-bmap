@@ -1,9 +1,9 @@
 package bmap
 
 import (
-	"github.com/rohenaz/go-aip"
+	"github.com/bitcoinschema/go-aip"
+	"github.com/bitcoinschema/go-bap"
 	"github.com/rohenaz/go-b"
-	"github.com/rohenaz/go-bap"
 	"github.com/rohenaz/go-bob"
 	mapp "github.com/rohenaz/go-map"
 )
@@ -26,7 +26,7 @@ func New() *Tx {
 }
 
 // FromBob returns a BmapTx from a BobTx
-func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
+func (bTx *Tx) FromBob(bobTx *bob.BobTx) (err error) {
 	for _, out := range bobTx.Out {
 		for _, tape := range out.Tape {
 			switch tape.Cell[0].S {
@@ -35,8 +35,7 @@ func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
 				bTx.AIP.FromTape(tape)
 				bTx.AIP.SetData(out.Tape)
 			case bap.Prefix:
-				bTx.BAP = bap.New()
-				err = bTx.BAP.FromTape(tape)
+				bTx.BAP, err = bap.NewFromTape(&tape)
 			case mapp.Prefix:
 				bTx.MAP = mapp.New()
 				err = bTx.MAP.FromTape(tape)

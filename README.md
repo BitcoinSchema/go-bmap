@@ -11,7 +11,7 @@ import "github.com/rohenaz/go-bmap"
 
 // Transform from BOB to BMAP
 bmapData := bmap.New()
-bmapData.FromBob(bobData)
+err := bmapData.FromString(bobData)
 ```
 
 ## Supported protocols
