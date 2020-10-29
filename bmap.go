@@ -36,17 +36,20 @@ func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
 func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
 	for _, out := range bobTx.Out {
 		for _, tape := range out.Tape {
-			switch tape.Cell[0].S {
-			case aip.Prefix:
-				bTx.AIP = aip.NewFromTape(tape)
-				bTx.AIP.SetDataFromTape(out.Tape)
-			case bap.Prefix:
-				bTx.BAP, err = bap.NewFromTape(&tape)
-			case magic.Prefix:
-				bTx.MAP, err = magic.NewFromTape(&tape)
-			case b.Prefix:
-				bTx.B = b.New()
-				err = bTx.B.FromTape(tape)
+			if len(tape.Cell) > 0 {
+				prefixData := tape.Cell[0].S
+				switch prefixData {
+				case aip.Prefix:
+					bTx.AIP = aip.NewFromTape(tape)
+					bTx.AIP.SetDataFromTape(out.Tape)
+				case bap.Prefix:
+					bTx.BAP, err = bap.NewFromTape(&tape)
+				case magic.Prefix:
+					bTx.MAP, err = magic.NewFromTape(&tape)
+				case b.Prefix:
+					bTx.B = b.New()
+					err = bTx.B.FromTape(tape)
+				}
 			}
 		}
 
