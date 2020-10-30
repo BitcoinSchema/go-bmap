@@ -183,10 +183,6 @@ The most basic way to show your support is to star :star2: the project, or to ra
 You can also support this project by [becoming a sponsor on GitHub](https://github.com/sponsors/BitcoinSchema) :clap:
 or by making a [**bitcoin donation**](https://gobitcoinsv.com/#sponsor) to ensure this journey continues indefinitely! :rocket:
 
-
-### Credits
-[Siggi](https://github.com/icellan) for creating [BAP](https://github.com/icellan/bap) :clap:
-
 <br/>
 
 ## License
