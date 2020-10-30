@@ -17,7 +17,7 @@ type Tx struct {
 	B   *b.B         `json:"B,omnitempty" bson:"B,omitempty"`
 	MAP magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	AIP *aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
-	BAP *bap.Data    `json:"BAP,omnitempty" bson:"BAP,omitempty"`
+	BAP *bap.Bap     `json:"BAP,omnitempty" bson:"BAP,omitempty"`
 }
 
 // New creates a new BmapTx
@@ -41,7 +41,7 @@ func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
 				switch prefixData {
 				case aip.Prefix:
 					bTx.AIP = aip.NewFromTape(tape)
-					bTx.AIP.SetDataFromTape(out.Tape)
+					bTx.AIP.SetDataFromTapes(out.Tape)
 				case bap.Prefix:
 					bTx.BAP, err = bap.NewFromTape(&tape)
 				case magic.Prefix:
