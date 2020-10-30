@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/bitcoinschema/go-b"
+	"github.com/bitcoinschema/go-bap"
 	"github.com/bitcoinschema/go-bob"
 	magic "github.com/bitcoinschema/go-map"
 )
@@ -66,5 +67,23 @@ func TestB(t *testing.T) {
 		t.Fatalf("error occurred: %s", err)
 	} else if bTx.Data.UTF8 != "Hello world" {
 		t.Fatalf("Unexpected data %s %s", bTx.Data.UTF8, err)
+	}
+}
+
+func TestNewFromBob(t *testing.T) {
+	bobTx, err := bob.NewFromString(sampleValidBobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	var bMap *Tx
+	bMap, err = NewFromBob(bobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	if bMap.BAP.Type != bap.ATTEST {
+		t.Fatalf("expected: %s but got: %s", bap.ATTEST, bMap.BAP.Type)
+	}
+	if bMap.AIP.Signature != "H+lubfcz5Z2oG8B7HwmP8Z+tALP+KNOPgedo7UTXwW8LBpMkgCgatCdpvbtf7wZZQSIMz83emmAvVS4S3F5X1wo=" {
+		t.Fatalf("expected: %s but got: %s", "H+lubfcz5Z2oG8B7HwmP8Z+tALP+KNOPgedo7UTXwW8LBpMkgCgatCdpvbtf7wZZQSIMz83emmAvVS4S3F5X1wo=", bMap.AIP.Signature)
 	}
 }
