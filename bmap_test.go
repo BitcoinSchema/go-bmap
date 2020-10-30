@@ -14,19 +14,21 @@ func TestFromBob(t *testing.T) {
 
 	bobData, err := bob.NewFromString(dataSource)
 	if err != nil {
-		t.Errorf("Failed to create bob tx %s", err)
+		t.Fatalf("failed to create bob tx %s", err)
 	}
 
-	bmapData := New()
-	bmapData.FromBob(bobData)
+	var bmapData *Tx
+	if bmapData, err = NewFromBob(bobData); err != nil {
+		t.Fatalf("error occurred: %s", err)
+	}
 
 	if bmapData.Tx.H != "ce7429a101b7aecdf1e5449151d0be17a3948cb5c22282832ae942107edb2272" {
-		t.Errorf("Inherited field failed %+v", bmapData)
+		t.Fatalf("inherited field failed %+v", bmapData)
 	}
 
 	mapData := bmapData.MAP
 	if mapData["app"] != "2paymail" {
-		t.Errorf("Test fromBob failed %+v", mapData)
+		t.Fatalf("test fromBob failed %+v", mapData)
 	}
 
 }
@@ -42,10 +44,11 @@ func TestMap(t *testing.T) {
 			{S: "something else"},
 		},
 	}
-	m := magic.MAP{}
-	m.FromTape(&tape)
-	if m["keyName1"] != "something" {
-		t.Errorf("SET Failed %s", m["keyName1"])
+	m, err := magic.NewFromTape(&tape)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err)
+	} else if m["keyName1"] != "something" {
+		t.Fatalf("SET Failed %s", m["keyName1"])
 	}
 }
 
@@ -58,9 +61,10 @@ func TestB(t *testing.T) {
 			{S: "utf8"},
 		},
 	}
-	m := b.B{}
-	err := m.FromTape(tape)
-	if m.Data.UTF8 != "Hello world" {
-		t.Errorf("Unexpected data %s %s", m.Data.UTF8, err)
+	bTx, err := b.NewFromTape(tape)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err)
+	} else if bTx.Data.UTF8 != "Hello world" {
+		t.Fatalf("Unexpected data %s %s", bTx.Data.UTF8, err)
 	}
 }

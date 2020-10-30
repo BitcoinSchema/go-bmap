@@ -10,54 +10,54 @@ import (
 
 // Tx is a Bmap formatted tx
 type Tx struct {
-	Blk bob.Blk      `json:"blk,omitempty" bson:"blk,omitempty"`
-	Tx  bob.TxInfo   `json:"tx,omitempty" bson:"tx,omitempty"`
-	In  []bob.Input  `json:"in,omitempty" bson:"in,omitempty"`
-	Out []bob.Output `json:"out,omitempty" bson:"out,omitempty"`
-	B   *b.B         `json:"B,omnitempty" bson:"B,omitempty"`
-	MAP magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	AIP *aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
-	BAP *bap.Bap     `json:"BAP,omnitempty" bson:"BAP,omitempty"`
-}
-
-// New creates a new BmapTx
-func New() *Tx {
-	return &Tx{}
+	B   *b.B         `json:"B,omitempty" bson:"B,omitempty"`
+	BAP *bap.Bap     `json:"BAP,omitempty" bson:"BAP,omitempty"`
+	Blk bob.Blk      `json:"blk,omitempty" bson:"blk,omitempty"`
+	In  []bob.Input  `json:"in,omitempty" bson:"in,omitempty"`
+	MAP magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
+	Out []bob.Output `json:"out,omitempty" bson:"out,omitempty"`
+	Tx  bob.TxInfo   `json:"tx,omitempty" bson:"tx,omitempty"`
 }
 
 // NewFromBob returns a new BmapTx from a BobTx
 func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
-	bmapTx = New()
+	bmapTx = new(Tx)
 	err = bmapTx.FromBob(bobTx)
 	return
 }
 
 // FromBob returns a BmapTx from a BobTx
-func (bTx *Tx) FromBob(bobTx *bob.Tx) (err error) {
+func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 	for _, out := range bobTx.Out {
-		for _, tape := range out.Tape {
+		for index, tape := range out.Tape {
 			if len(tape.Cell) > 0 {
 				prefixData := tape.Cell[0].S
 				switch prefixData {
 				case aip.Prefix:
-					bTx.AIP = aip.NewFromTape(tape)
-					bTx.AIP.SetDataFromTapes(out.Tape)
+					t.AIP = aip.NewFromTape(tape)
+					t.AIP.SetDataFromTapes(out.Tape)
 				case bap.Prefix:
-					bTx.BAP, err = bap.NewFromTape(&tape)
+					if t.BAP, err = bap.NewFromTape(&out.Tape[index]); err != nil {
+						return
+					}
 				case magic.Prefix:
-					bTx.MAP, err = magic.NewFromTape(&tape)
+					if t.MAP, err = magic.NewFromTape(&out.Tape[index]); err != nil {
+						return
+					}
 				case b.Prefix:
-					bTx.B = b.New()
-					err = bTx.B.FromTape(tape)
+					if t.B, err = b.NewFromTape(out.Tape[index]); err != nil {
+						return
+					}
 				}
 			}
 		}
 
 		// Set inherited fields
-		bTx.Tx = bobTx.Tx
-		bTx.Blk = bobTx.Blk
-		bTx.In = bobTx.In
-		bTx.Out = bobTx.Out
+		t.Blk = bobTx.Blk
+		t.In = bobTx.In
+		t.Out = bobTx.Out
+		t.Tx = bobTx.Tx
 	}
-	return nil
+	return
 }
