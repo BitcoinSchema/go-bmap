@@ -24,7 +24,7 @@ func TestFromBob(t *testing.T) {
 	}
 
 	if bmapData.Tx.H != "ce7429a101b7aecdf1e5449151d0be17a3948cb5c22282832ae942107edb2272" {
-		t.Fatalf("inherited field failed %+v", bmapData)
+		t.Fatalf("inherited field failed %+v", bmapData.MAP)
 	}
 
 	mapData := bmapData.MAP
