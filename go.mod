@@ -7,5 +7,5 @@ require (
 	github.com/bitcoinschema/go-b v0.0.5
 	github.com/bitcoinschema/go-bap v0.1.12
 	github.com/bitcoinschema/go-bob v0.0.14
-	github.com/bitcoinschema/go-map v0.0.3
+	github.com/bitcoinschema/go-map v0.0.6
 )
