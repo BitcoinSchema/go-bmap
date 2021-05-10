@@ -1,11 +1,10 @@
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
-github.com/bitcoinschema/go-aip v0.1.5/go.mod h1:JO5VL43rxajsejyGtMCZwpysABI0hougYWrF+OyT1XA=
 github.com/bitcoinschema/go-aip v0.1.6 h1:ss6/r3S95hARWq125ufGGnUeFW/Rmd2cAT7LbmK3VuU=
 github.com/bitcoinschema/go-aip v0.1.6/go.mod h1:jafNEhdJYmSnz8OhP2bWjbt2Ryj4W4D7Ru3+gOtvXII=
 github.com/bitcoinschema/go-b v0.0.10 h1:jXCzzzKQMgaX3nlvcNTt2fS98Tm81gxVgCrK1M4RT00=
 github.com/bitcoinschema/go-b v0.0.10/go.mod h1:FPVGaENZAsMVDMfEFWGi32Zs4dRziN8QcJOe1a+QC0g=
-github.com/bitcoinschema/go-bap v0.2.4 h1:/556inYI4Yq/70l+5iP1Os2QamegExi/H3bcFU7XU+c=
-github.com/bitcoinschema/go-bap v0.2.4/go.mod h1:98GhfCM7c31qByfDi0tIt4u16cTl8eLZfq7xXNvTa40=
+github.com/bitcoinschema/go-bap v0.2.5 h1:MgqjShf92noMzZmWwkeL2VoVwKjU1y4v2mKwazyfqk8=
+github.com/bitcoinschema/go-bap v0.2.5/go.mod h1:QU9ZxV6wEhIRERiiBrekm09O+dbEX1IgIaQkDRP+v7Q=
 github.com/bitcoinschema/go-bitcoin v0.3.13/go.mod h1:6VWAJpyzn1ne/DO/XcFlXgKxyA4RSORBDhlYd9EFYYw=
 github.com/bitcoinschema/go-bitcoin v0.3.16 h1:2rcQJjH01aHfZ1J2IPaVvjSxFSb/egoGPs7mKvzzya8=
 github.com/bitcoinschema/go-bitcoin v0.3.16/go.mod h1:dMrwTCmXoSd3RVpsZJe7MJLAw1D8qJSmZb9gjZRUQ7M=
