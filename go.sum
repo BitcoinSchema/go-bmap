@@ -1,6 +1,7 @@
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
-github.com/bitcoinschema/go-aip v0.1.5 h1:2L1SpU8H3W0Nxs62HrWOfCh/hopfp6faJ6uzS9uno24=
 github.com/bitcoinschema/go-aip v0.1.5/go.mod h1:JO5VL43rxajsejyGtMCZwpysABI0hougYWrF+OyT1XA=
+github.com/bitcoinschema/go-aip v0.1.6 h1:ss6/r3S95hARWq125ufGGnUeFW/Rmd2cAT7LbmK3VuU=
+github.com/bitcoinschema/go-aip v0.1.6/go.mod h1:jafNEhdJYmSnz8OhP2bWjbt2Ryj4W4D7Ru3+gOtvXII=
 github.com/bitcoinschema/go-b v0.0.10 h1:jXCzzzKQMgaX3nlvcNTt2fS98Tm81gxVgCrK1M4RT00=
 github.com/bitcoinschema/go-b v0.0.10/go.mod h1:FPVGaENZAsMVDMfEFWGi32Zs4dRziN8QcJOe1a+QC0g=
 github.com/bitcoinschema/go-bap v0.2.4 h1:/556inYI4Yq/70l+5iP1Os2QamegExi/H3bcFU7XU+c=
