@@ -8,4 +8,5 @@ require (
 	github.com/bitcoinschema/go-bap v0.2.7
 	github.com/bitcoinschema/go-bob v0.1.9
 	github.com/bitcoinschema/go-map v0.0.14
+	golang.org/x/crypto v0.0.0-20220214200702-86341886e292 // indirect
 )
