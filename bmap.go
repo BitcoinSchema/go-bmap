@@ -4,6 +4,7 @@ import (
 	"github.com/bitcoinschema/go-aip"
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
+	"github.com/bitcoinschema/go-bmap/run"
 	"github.com/bitcoinschema/go-bob"
 	magic "github.com/bitcoinschema/go-map"
 )
@@ -17,6 +18,7 @@ type Tx struct {
 	In  []bob.Input  `json:"in,omitempty" bson:"in,omitempty"`
 	MAP magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	Out []bob.Output `json:"out,omitempty" bson:"out,omitempty"`
+	Run run.Jig      `json:"Run,omitempty" bson:"Run,omitempty"`
 	Tx  bob.TxInfo   `json:"tx,omitempty" bson:"tx,omitempty"`
 }
 
@@ -34,6 +36,9 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 			if len(tape.Cell) > 0 {
 				prefixData := tape.Cell[0].S
 				switch prefixData {
+				case run.Prefix:
+					// t.Run = run.NewFromTape(tape)
+					// t.Run = run.SetDataFromTapes(out.Tape)
 				case aip.Prefix:
 					t.AIP = aip.NewFromTape(tape)
 					t.AIP.SetDataFromTapes(out.Tape)
