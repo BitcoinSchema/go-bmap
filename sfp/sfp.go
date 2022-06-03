@@ -15,7 +15,7 @@ type SFP struct {
 	Amount            uint64
 	AssetPaymail      string
 	AuthorizerAddress string
-	OwnerAddress      string	
+	OwnerAddress      string
 	IssuerAddress     string
 	LinkedPrevOut     string
 	LinkedPrevOutSig  string
@@ -32,13 +32,13 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 	if err != nil {
 		return nil, err
 	}
-	
+
 	scriptParts := strings.Split(asm, " ")
-	
+
 	if len(scriptParts) < 9 || scriptParts[0] != "OP_NOP" {
-		return nil, fmt.Errorf("Not a valid SFP Token! %d", len(scriptParts))
+		return nil, fmt.Errorf("not a valid SFP Token! %d", len(scriptParts))
 	}
-	
+
 	// Detect 2nd script chunk is `"SFP@0.3",`
 	var protocolBytes []byte
 	protocolBytes, err = hex.DecodeString(scriptParts[1])
@@ -50,7 +50,7 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		// Set version
 		protocolVersionParts := strings.Split(string(protocolBytes), "@")
 		if len(protocolVersionParts) != 2 {
-			return nil, fmt.Errorf("Invalid version signature: %s", string(protocolBytes))
+			return nil, fmt.Errorf("invalid version signature: %s", string(protocolBytes))
 		}
 
 		sfp.Version = protocolVersionParts[1]
@@ -124,7 +124,7 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		amountStr := strings.TrimPrefix(string(x), "0")
 		amount, err := strconv.ParseUint(amountStr, 10, 64)
 		if err != nil {
-			return nil, fmt.Errorf("Failed to get amount %w", err)
+			return nil, fmt.Errorf("failed to get amount %w", err)
 		}
 		sfp.Amount = amount
 		log.Println("Amount", amount)
@@ -132,11 +132,12 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		// Set notes
 		notes := data[0][16 : len(data[0])-6]
 
-		notesBytes, err := hex.DecodeString(notes)
+		var notesBytes []byte
+		notesBytes, err = hex.DecodeString(notes)
 		if err != nil {
-			return nil, fmt.Errorf("Failed to get notes %w", err)
+			return nil, fmt.Errorf("failed to get notes %w", err)
 		}
-		sfp.Notes = fmt.Sprintf("%s", notesBytes)
+		sfp.Notes = string(notesBytes)
 		log.Println("notes", sfp.Notes)
 
 		// Note on outpoints: I think format is <hex>:<out> or OP_FALSE if not present
@@ -161,5 +162,6 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 
 // }
 
-// OP_NOP [sfp@0.3] [asset paymail] [authoriser address] [owner address] [issuer address] [linked previous outpoint] [linked previous outpoint signature] <more script code> OP_RETURN [data]
+// OP_NOP [sfp@0.3] [asset paymail] [authoriser address] [owner address] [issuer address] [linked previous outpoint]
+// [linked previous outpoint signature] <more script code> OP_RETURN [data]
 // https://docs.moneybutton.com/docs/sfp/wallets-integration-guide.html
