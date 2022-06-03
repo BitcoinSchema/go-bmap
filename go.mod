@@ -11,3 +11,5 @@ require (
 	github.com/bitcoinschema/go-map v0.0.14
 	github.com/libsv/go-bt v1.0.6
 )
+
+replace github.com/libsv/go-bt => github.com/libsv/go-bt v1.0.4

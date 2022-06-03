@@ -160,7 +160,7 @@ func (j *Jig) FromTape(tape *bob.Tape) error {
 
 	// Run pushdata format:
 	// 0 - run
-	// 1- version
+	// 1 - version
 	// 2 - App ID
 	// 3 - json payload
 

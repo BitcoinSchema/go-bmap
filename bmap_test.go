@@ -38,6 +38,7 @@ func TestFromBob(t *testing.T) {
 }
 
 func TestMap(t *testing.T) {
+
 	tape := bob.Tape{
 		Cell: []bob.Cell{
 			{S: magic.Prefix},
@@ -48,11 +49,27 @@ func TestMap(t *testing.T) {
 			{S: "something else"},
 		},
 	}
+
 	m, err := magic.NewFromTape(&tape)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
 	} else if m["keyName1"] != "something" {
 		t.Fatalf("SET Failed %s", m["keyName1"])
+	}
+
+}
+
+func TestMapFromRawTxString(t *testing.T) {
+	bob, err := bob.NewFromRawTxString(`01000000018952fe8892c429e69feb9b2dd9cd1f12ed757dc62e8d628b5a215f78ed895374020000006a47304402204784632fabca0f4aaa05dd6983633b2e8bf708d8766d0385f3393fff0623b88c02201a760e144116d47967501c2ea50dc231ae57c0eb78769d63713ce0648025c820412103221cb24c4e8b05a58bcf2ee8411f62e337c8099c8646babd47d0960899f69acaffffffff04680b0000000000001976a91409cc4559bdcb84cb35c107743f0dbb10d66679cc88ac0f720000000000001976a9146b1fe7b2063aa07766c764c0796fd4efd00340f288ac8a893b00000000001976a914be5f62df829ef754b8be09b37b04c4e7f9ff59d588ac0000000000000000ad006a223150755161374b36324d694b43747373534c4b79316b683536575755374d74555235035345540361707008746f6e6963706f7704747970650b6f666665725f636c69636b0f6f666665725f636f6e6669675f696403383038106f666665725f73657373696f6e5f6964403464303537386561643432393266653163643163393936643931623534613130653333653334623031396231386330613564353730376461346461346437653900000000`)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err)
+	}
+
+	m, err := magic.NewFromTape(&bob.Out[3].Tape[1])
+	if err != nil {
+		t.Fatalf("error occurred: %s", err)
+	} else if m["CMD"] != "SET" && m["app"] != "tonicpow" {
+		t.Fatalf("SET Failed %v", m)
 	}
 }
 
@@ -83,7 +100,7 @@ func TestRunFromTx(t *testing.T) {
 		t.Fatalf("Failed to parse: %s", err)
 	}
 
-	t.Fatalf(tx.GetTxID())
+	// t.Fatalf(tx.GetTxID())
 	runTx, err := run.NewFromUtxo(tx.Outputs[0])
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
