@@ -7,7 +7,7 @@ require (
 	github.com/bitcoinschema/go-b v0.0.14
 	github.com/bitcoinschema/go-bap v0.2.7
 	github.com/bitcoinschema/go-bitcoin v0.3.20
-	github.com/bitcoinschema/go-bob v0.1.9
+	github.com/bitcoinschema/go-bob v0.1.10
 	github.com/bitcoinschema/go-map v0.0.14
 	github.com/btcsuite/btcd v0.23.0 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
