@@ -32,9 +32,8 @@ func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
 // NewFromTx returns a new BmapTx from a hex string
 func NewFromTx(tx string) (bmapTx *Tx, err error) {
 	var bobTx *bob.Tx
-	bobTx, err = bob.NewFromRawTxString(tx)
-	if err != nil {
-		return nil, err
+	if bobTx, err = bob.NewFromRawTxString(tx); err != nil {
+		return
 	}
 
 	bmapTx = new(Tx)
