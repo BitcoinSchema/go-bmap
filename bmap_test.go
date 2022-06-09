@@ -37,6 +37,34 @@ func TestFromBob(t *testing.T) {
 
 }
 
+func TestFromTx(t *testing.T) {
+
+	t.Run("error", func(t *testing.T) {
+		tx := ""
+		_, err := NewFromTx(tx)
+		if err == nil {
+			t.Fatalf("error should occur")
+		}
+	})
+
+	t.Run("success", func(t *testing.T) {
+		tx := "01000000018952fe8892c429e69feb9b2dd9cd1f12ed757dc62e8d628b5a215f78ed895374020000006a47304402204784632fabca0f4aaa05dd6983633b2e8bf708d8766d0385f3393fff0623b88c02201a760e144116d47967501c2ea50dc231ae57c0eb78769d63713ce0648025c820412103221cb24c4e8b05a58bcf2ee8411f62e337c8099c8646babd47d0960899f69acaffffffff04680b0000000000001976a91409cc4559bdcb84cb35c107743f0dbb10d66679cc88ac0f720000000000001976a9146b1fe7b2063aa07766c764c0796fd4efd00340f288ac8a893b00000000001976a914be5f62df829ef754b8be09b37b04c4e7f9ff59d588ac0000000000000000ad006a223150755161374b36324d694b43747373534c4b79316b683536575755374d74555235035345540361707008746f6e6963706f7704747970650b6f666665725f636c69636b0f6f666665725f636f6e6669675f696403383038106f666665725f73657373696f6e5f6964403464303537386561643432393266653163643163393936643931623534613130653333653334623031396231386330613564353730376461346461346437653900000000"
+		bmapData, err := NewFromTx(tx)
+		if err != nil {
+			t.Fatalf("error occurred: %s", err)
+		}
+
+		if bmapData.Tx.H != "1817ecc5b3207d9b33014b461688477146139105f198d69efadc73d05cfd3ed8" {
+			t.Fatalf("inherited field failed %+v", bmapData.MAP)
+		}
+
+		mapData := bmapData.MAP
+		if mapData["app"] != "tonicpow" {
+			t.Fatalf("test fromTx failed %+v", mapData)
+		}
+	})
+}
+
 func TestMap(t *testing.T) {
 
 	tape := bob.Tape{
@@ -83,7 +111,7 @@ func TestRun(t *testing.T) {
 		},
 	}
 
-	runTx, err := run.NewFromTape(&tape)
+	runTx, err := run.NewFromTape(tape)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
 	} else if runTx.AppID != "cryptofights" {

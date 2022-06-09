@@ -18,12 +18,25 @@ type Tx struct {
 	In  []bob.Input  `json:"in,omitempty" bson:"in,omitempty"`
 	MAP magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	Out []bob.Output `json:"out,omitempty" bson:"out,omitempty"`
-	Run run.Jig      `json:"Run,omitempty" bson:"Run,omitempty"`
+	Run *run.Jig     `json:"Run,omitempty" bson:"Run,omitempty"`
 	Tx  bob.TxInfo   `json:"tx,omitempty" bson:"tx,omitempty"`
 }
 
 // NewFromBob returns a new BmapTx from a BobTx
 func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
+	bmapTx = new(Tx)
+	err = bmapTx.FromBob(bobTx)
+	return
+}
+
+// NewFromTx returns a new BmapTx from a hex string
+func NewFromTx(tx string) (bmapTx *Tx, err error) {
+	var bobTx *bob.Tx
+	bobTx, err = bob.NewFromRawTxString(tx)
+	if err != nil {
+		return nil, err
+	}
+
 	bmapTx = new(Tx)
 	err = bmapTx.FromBob(bobTx)
 	return
@@ -37,8 +50,9 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 				prefixData := tape.Cell[0].S
 				switch prefixData {
 				case run.Prefix:
-					// t.Run = run.NewFromTape(tape)
-					// t.Run = run.SetDataFromTapes(out.Tape)
+					if t.Run, err = run.NewFromTape(tape); err != nil {
+						return
+					}
 				case aip.Prefix:
 					t.AIP = aip.NewFromTape(tape)
 					t.AIP.SetDataFromTapes(out.Tape)
