@@ -5,12 +5,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 
 	"github.com/bitcoinschema/go-bob"
 	"github.com/libsv/go-bt"
 )
+
+var debug = os.Getenv("BMAP_DEBUG") == "1"
 
 // Prefix is the run protocol prefix found in the 1st pushdata
 const Prefix string = "run"
@@ -104,7 +107,9 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 			}
 		case 1:
 			// TODO: Convert from asm to int
-			log.Println("Version", val)
+			if debug {
+				log.Println("Version", val)
+			}
 			jig.Version = 0 // val
 		case 2:
 			appID, err := hex.DecodeString(val)
@@ -133,9 +138,9 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 
 // NewFromTape will create a new AIP object from a bob.Tape
 // Using the FromTape() alone will prevent validation (data is needed via SetData to enable)
-func NewFromTape(tape *bob.Tape) (j *Jig, e error) {
+func NewFromTape(tape bob.Tape) (j *Jig, e error) {
 	j = new(Jig)
-	err := j.FromTape(tape)
+	err := j.FromTape(&tape)
 	if err != nil {
 		return nil, err
 	}
@@ -170,10 +175,13 @@ func (j *Jig) FromTape(tape *bob.Tape) error {
 		}
 
 		// Set the APP ID
+		// TODO APP ID is not set on most run transactions - just OP_FALSE
 		j.AppID = tape.Cell[2].S
 
 		// Set the version
-		num, err := strconv.ParseInt(tape.Cell[1].H, 16, 64)
+		// bob parses this in a weird way, it should be just a number, but we can only get the OP_DATA_ hex value
+		version := strings.Replace(tape.Cell[1].H, "OP_DATA_", "", 1)
+		num, err := strconv.ParseInt(version, 16, 64)
 		if err != nil {
 			return err
 		}
