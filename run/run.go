@@ -5,12 +5,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 
 	"github.com/bitcoinschema/go-bob"
 	"github.com/libsv/go-bt"
 )
+
+var debug = os.Getenv("BMAP_DEBUG") == "1"
 
 // Prefix is the run protocol prefix found in the 1st pushdata
 const Prefix string = "run"
@@ -104,7 +107,9 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 			}
 		case 1:
 			// TODO: Convert from asm to int
-			log.Println("Version", val)
+			if debug {
+				log.Println("Version", val)
+			}
 			jig.Version = 0 // val
 		case 2:
 			appID, err := hex.DecodeString(val)

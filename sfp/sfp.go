@@ -4,11 +4,14 @@ import (
 	"encoding/hex"
 	"fmt"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 
 	"github.com/libsv/go-bt"
 )
+
+var debug = os.Getenv("BMAP_DEBUG") == "1"
 
 // SFP - Simple Fabriik Protocol
 type SFP struct {
@@ -62,7 +65,9 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		}
 		sfp.AssetPaymail = string(assetPaymailBytes)
 
-		log.Printf("Paymail %s", sfp.AssetPaymail)
+		if debug {
+			log.Printf("Paymail %s", sfp.AssetPaymail)
+		}
 		// Set Authorizer Address
 		// var authorizerAddressBytes []byte
 		// authorizerAddressBytes, err = hex.DecodeString(scriptParts[3])
@@ -70,7 +75,9 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		// 	return nil, err
 		// }
 		sfp.AuthorizerAddress = scriptParts[3]
-		log.Printf("Authorizer %s", sfp.AuthorizerAddress)
+		if debug {
+			log.Printf("Authorizer %s", sfp.AuthorizerAddress)
+		}
 		// Set Owner Address
 		// var ownerAddressBytes []byte
 		// ownerAddressBytes, err = hex.DecodeString(scriptParts[4])
@@ -78,7 +85,9 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		// 	return nil, err
 		// }
 		sfp.OwnerAddress = scriptParts[4] // string(ownerAddressBytes)
-		log.Printf("Owner %s", sfp.OwnerAddress)
+		if debug {
+			log.Printf("Owner %s", sfp.OwnerAddress)
+		}
 		// Set Issuer Address
 		// var issuerAddressBytes []byte
 		// issuerAddressBytes, err = hex.DecodeString(scriptParts[5])
@@ -127,7 +136,9 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 			return nil, fmt.Errorf("failed to get amount %w", err)
 		}
 		sfp.Amount = amount
-		log.Println("Amount", amount)
+		if debug {
+			log.Println("Amount", amount)
+		}
 
 		// Set notes
 		notes := data[0][16 : len(data[0])-6]
@@ -138,7 +149,9 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 			return nil, fmt.Errorf("failed to get notes %w", err)
 		}
 		sfp.Notes = string(notesBytes)
-		log.Println("notes", sfp.Notes)
+		if debug {
+			log.Println("notes", sfp.Notes)
+		}
 
 		// Note on outpoints: I think format is <hex>:<out> or OP_FALSE if not present
 		if linkedPrevOut == nil {
