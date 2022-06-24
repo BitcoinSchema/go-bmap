@@ -48,12 +48,12 @@ type Statement struct {
 // cre	New owners of jigs and code created
 // exec	Statements to execute on the jigs
 type Payload struct {
-	In   uint64      `json:"in"`
-	Ref  []string    `json:"ref"`
-	Out  []string    `json:"out"`
-	Del  []string    `json:"del"`
-	Cre  []string    `json:"cre"`
-	Exec []Statement `json:"exec"`
+	In   uint64        `json:"in"`
+	Ref  []string      `json:"ref"`
+	Out  []string      `json:"out"`
+	Del  []string      `json:"del"`
+	Cre  []interface{} `json:"cre"`
+	Exec []Statement   `json:"exec"`
 }
 
 // Jig is a RunOnBitcoin object
