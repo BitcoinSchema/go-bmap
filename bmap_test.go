@@ -15,6 +15,7 @@ import (
 )
 
 var cryptofights = "cryptofights"
+var something = "something"
 
 func TestFromBob(t *testing.T) {
 
@@ -89,8 +90,8 @@ func TestFromTx(t *testing.T) {
 func TestMap(t *testing.T) {
 
 	keyName1 := "keyName1"
-	something := "something"
-	keyName2 := "something"
+	something := something
+	keyName2 := something
 	somethingElse := "something else"
 
 	tape := bpu.Tape{
@@ -107,7 +108,7 @@ func TestMap(t *testing.T) {
 	m, err := magic.NewFromTape(&tape)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if m["keyName1"] != "something" {
+	} else if m["keyName1"] != something {
 		t.Fatalf("SET Failed %s", m["keyName1"])
 	}
 
