@@ -14,6 +14,8 @@ import (
 	magic "github.com/bitcoinschema/go-map"
 )
 
+var cryptofights = "cryptofights"
+
 func TestFromBob(t *testing.T) {
 
 	dataSource := `{"_id":"5ebc04c7814c6a17a6c90b3b","tx":{"h":"ce7429a101b7aecdf1e5449151d0be17a3948cb5c22282832ae942107edb2272"},"in":[{"i":0,"tape":[{"cell":[{"b":"MEQCIDUGRtDdmf2I2p1vcA2s4fMuBcmnSi5kOI2chSiFrYQKAiAq8XSIx8EbM2oKJJC9t/SFXTGnJBfE7mRKdGOVR7zIB0E=","s":"0D\u0002 5\u0006F�ݙ��ڝop\r���.\u0005ɧJ.d8���(���\n\u0002 *�t���\u001b3j\n$����]1�$\u0017��dJtc�G��\u0007A","ii":0,"i":0},{"b":"A/20DJgUWAXROgZTKDRmcC0ja306xpg3SiMTPy3QKhqQ","s":"\u0003��\f�\u0014X\u0005�:\u0006S(4fp-#k}:Ƙ7J#\u0013?-�*\u001a�","ii":1,"i":1}],"i":0}],"e":{"h":"f8448e73fc7667b91f86cf152b9bc4d88c365174989d79871e64ca8c66c1e785","i":0,"a":"1P1dKk7BCB6iTUz13w1eXkLfcj8a8dC4iv"},"seq":4294967295}],"out":[{"i":0,"tape":[{"cell":[{"op":0,"ops":"OP_0","ii":0,"i":0},{"op":106,"ops":"OP_RETURN","ii":1,"i":1}],"i":0},{"cell":[{"b":"MVB1UWE3SzYyTWlLQ3Rzc1NMS3kxa2g1NldXVTdNdFVSNQ==","s":"1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5","ii":2,"i":0},{"b":"U0VU","s":"SET","ii":3,"i":1},{"b":"YXBw","s":"app","ii":4,"i":2},{"b":"MnBheW1haWw=","s":"2paymail","ii":5,"i":3},{"b":"cGF5bWFpbA==","s":"paymail","ii":6,"i":4},{"b":"aGFnYmFyZEBtb25leWJ1dHRvbi5jb20=","s":"hagbard@moneybutton.com","ii":7,"i":5},{"b":"cHVibGljX2tleQ==","s":"public_key","ii":8,"i":6},{"b":"MDJjODliNjc5MGViNjA1MDYyYTMxZjEyNDI1MDU5NGJkMGZkMDI5ODhkYTI1NDFiM2QyNWU3ZWYzOTM3ZmI0YWUw","s":"02c89b6790eb605062a31f124250594bd0fd02988da2541b3d25e7ef3937fb4ae0","ii":9,"i":7},{"b":"cGxhdGZvcm0=","s":"platform","ii":10,"i":8},{"b":"dHdpdHRlcg==","s":"twitter","ii":11,"i":9},{"b":"cHJvb2ZfdXJs","s":"proof_url","ii":12,"i":10},{"b":"aHR0cHM6Ly90d2l0dGVyLmNvbS9oYWdiYXJkZGQvc3RhdHVzLzEyMDUxODk1ODAzMDkzNzcwMjQ=","s":"https://twitter.com/hagbarddd/status/1205189580309377024","ii":13,"i":11},{"b":"cHJvb2ZfYm9keQ==","s":"proof_body","ii":14,"i":12},{"b":"SGkKCk15IHBheW1haWwgaXMgaGFnYmFyZEBtb25leWJ1dHRvbi5jb20=","s":"Hi\n\nMy paymail is hagbard@moneybutton.com","ii":15,"i":13},{"b":"cHJvb2ZfaWQ=","s":"proof_id","ii":16,"i":14},{"b":"Sms5dlFncGREcG9XMHFEWQ==","s":"Jk9vQgpdDpoW0qDY","ii":17,"i":15}],"i":1},{"cell":[{"b":"MXNpZ255Q2l6cDFWeUJzSjVTczJ0RUFndzd6Q1lOSnU0","s":"1signyCizp1VyBsJ5Ss2tEAgw7zCYNJu4","ii":19,"i":0},{"b":"SU5LRmIxNU1uQVhxTlFueStiNEtBVm5HTnR5bUcwZEhTdTEzKzg3MSt0aTBXTjVGQmVBLzdEZ1VuMXRsdzZGN29kYlc3SURyVmVQS1RMclRQQWlEcXlvPQ==","s":"INKFb15MnAXqNQny+b4KAVnGNtymG0dHSu13+871+ti0WN5FBeA/7DgUn1tlw6F7odbW7IDrVePKTLrTPAiDqyo=","ii":20,"i":1},{"b":"MDJjODliNjc5MGViNjA1MDYyYTMxZjEyNDI1MDU5NGJkMGZkMDI5ODhkYTI1NDFiM2QyNWU3ZWYzOTM3ZmI0YWUw","s":"02c89b6790eb605062a31f124250594bd0fd02988da2541b3d25e7ef3937fb4ae0","ii":21,"i":2},{"b":"aGFnYmFyZEBtb25leWJ1dHRvbi5jb20=","s":"hagbard@moneybutton.com","ii":22,"i":3}],"i":2}],"e":{"v":0,"i":0,"a":"false"}},{"i":1,"tape":[{"cell":[{"op":118,"ops":"OP_DUP","ii":0,"i":0},{"op":169,"ops":"OP_HASH160","ii":1,"i":1},{"b":"7njcAgMt9eekcx5JZXFDoaThy9M=","s":"�x�\u0002\u0003-��s\u001eIeqC�����","ii":2,"i":2},{"op":136,"ops":"OP_EQUALVERIFY","ii":3,"i":3},{"op":172,"ops":"OP_CHECKSIG","ii":4,"i":4}],"i":0}],"e":{"v":31202,"i":1,"a":"1Njvc7dj8UHG6hnV5k5ZjSJtPgTofknDmx"}}],"lock":0,"blk":{"i":618112,"h":"000000000000000001e1e1f2995c9ba2e316f6fb85c247c923c591e56ea00fb6","t":1579328162},"i":478}`
@@ -128,7 +130,6 @@ func TestMapFromRawTxString(t *testing.T) {
 func TestRun(t *testing.T) {
 	r := "run"
 	zero5 := "05"
-	cryptofights := "cryptofights"
 	data := "{\"in\":5,\"ref\":[\"303ab9e7941ad08482f876a4501116c57a2f3eacf8608b3de235525daf81b357_o1\",\"c2c4c971e85b499c29a8ab2148fd324fe12b550b8f4f57658a4686e011d8fd58_o1\",\"cfa749424a1547a169d0b8fc0a54fed8918d2cf46eeea242fd2aebe3c8875a3c_o1\",\"a9082e00bbedfc80986c7821ed0b2a81dd34ad6bbd2a07fd9e5a06394614a957_o1\",\"705d8340b64e73fa9758e7f7799d28da38669fe0e2cb1ce1960abb1a6a26acf3_o1\",\"92f78b159c4e51ad52ed6d041d2253c2683d95d63a1568e3ce1e8ea516bfb962_o1\",\"08f34f29fd07850ca66973784362927523ea7940084fbd3690676b81628f8c07_o1\",\"d67bf5454d02dafcb4350e65899d890a0660e51442dc0c0f6f7b256a85d19eac_o1\",\"14e278c68ff521e0916ad7c713ae4a0156e76361dbd3b2b357dfb6028e0dca7a_o1\",\"01b37806b3ef4d45f0a73bfe10e916d4f280f9628569765e638259afeb15da16_o1\",\"918d80459b2469381fa493c10bb42d0cdca465170b9d8f88d7c85c55940b8bbc_o1\",\"a78f5a6d72f78711e66c6211fbbd0a0bfd15ad91bdd00404928a9facc63da6d9_o1\",\"74a9d9eddee3fada42489b9db04ef362043225d70799cbfa32a0fc425892ad31_o1\",\"3a67cec3c16bdb847b972bee2fc1c0717c59edcae7bf5f48c91feccfa635af33_o1\",\"382713c2b7abf570b1d344ebcf6b7896d8c5d8fd6362735c5fe72ed793829670_o1\"],\"out\":[\"e0eceb4e317aee7e68e39f22724bb6242c6b79e00483cb4b0250469235bb1ce8\",\"6720ce1b1eeb8401a4258aaab51be88f947744b935c9d7d7eed7c1e8306c8dd3\",\"dee4f6758363d2adfb614783305f6135c13f47772231dbb318d795c5d64d2fac\",\"add7d36d4ab36b1b2e922aa0a21500f3e1a89cd99b80a91acc75ffadd9ee248b\",\"fd86dc04c8a6657e3643a6eaa23892a89e87c481243effb3a22b8e118928e103\",\"df77a80e8a1a950a2cbf6dcc717a7ee461e741d8350edb6fb7aaa35fbf59036f\"],\"del\":[],\"cre\":[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\"],\"exec\":[{\"op\":\"NEW\",\"data\":[{\"$jig\":5},[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\",{\"allowBots\":true,\"fee\":0,\"lobby\":5,\"playerCount\":1,\"reward\":0,\"rulesId\":\"bot5\",\"tier\":3},[{\"fighter\":{\"$jig\":0},\"items\":[{\"$jig\":1},{\"$jig\":2},{\"$und\":1},{\"$jig\":3}],\"owner\":\"1Pm9cCc9RnZnAdqbKnXgqbeauRa5nfAejz\",\"pubkey\":\"038630f8220616856e7ebb73847643b4fe39fdcb4d7145b687ed1bb78340c77e08\",\"skills\":[{\"$jig\":7},{\"$jig\":8},{\"$jig\":9},{\"$jig\":10}],\"tags\":[],\"userId\":\"exgen\"},{\"coins\":[],\"fighter\":{\"$jig\":4},\"items\":[],\"pubkey\":\"02c74b8db80b5af8dc9fe14fdc098d3b7073184485471df9cf243330ae8da67a98\",\"skills\":[{\"$dup\":[\"1\",\"2\",\"0\",\"skills\",\"0\"]}],\"tags\":[\"bot\"],\"userId\":\"cryptofights\"}],\"14ad8af5a501229178217f8f85d698fef13ecaa56c80778cc9d9b1faade4030f\",1622457372560]]}]}"
 	tape := bpu.Tape{
 		Cell: []bpu.Cell{
@@ -142,7 +143,7 @@ func TestRun(t *testing.T) {
 	runTx, err := run.NewFromTape(tape)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if runTx.AppID != "cryptofights" {
+	} else if runTx.AppID != cryptofights {
 		t.Fatalf("Unexpected data %s %s", runTx.AppID, err)
 	}
 
@@ -160,7 +161,7 @@ func TestRunFromTx(t *testing.T) {
 	runTx, err := run.NewFromUtxo(tx.Outputs[0])
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if runTx.AppID != "cryptofights" {
+	} else if runTx.AppID != cryptofights {
 		t.Fatalf("Unexpected data %s", runTx.AppID)
 	}
 

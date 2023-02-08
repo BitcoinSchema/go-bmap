@@ -124,7 +124,7 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 			if err != nil {
 				return nil, fmt.Errorf("failed to decode app id: %w", err)
 			}
-			jig.AppID = string(appID)
+			jig.AppID = appID
 		case 3:
 
 			var payload Payload
