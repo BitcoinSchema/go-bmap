@@ -6,20 +6,18 @@ import (
 	"github.com/bitcoinschema/go-bap"
 	"github.com/bitcoinschema/go-bmap/run"
 	"github.com/bitcoinschema/go-bob"
+	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
 )
 
-// Tx is a Bmap formatted tx
+// Tx is a Bmap formatted tx// Tx is a Bmap formatted tx
 type Tx struct {
-	AIP *aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
-	B   *b.B         `json:"B,omitempty" bson:"B,omitempty"`
-	BAP *bap.Bap     `json:"BAP,omitempty" bson:"BAP,omitempty"`
-	Blk bob.Blk      `json:"blk,omitempty" bson:"blk,omitempty"`
-	In  []bob.Input  `json:"in,omitempty" bson:"in,omitempty"`
-	MAP magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
-	Out []bob.Output `json:"out,omitempty" bson:"out,omitempty"`
-	Run *run.Jig     `json:"Run,omitempty" bson:"Run,omitempty"`
-	Tx  bob.TxInfo   `json:"tx,omitempty" bson:"tx,omitempty"`
+	bpu.BpuTx
+	AIP *aip.Aip  `json:"AIP,omitempty" bson:"AIP,omitempty"`
+	B   *b.B      `json:"B,omitempty" bson:"B,omitempty"`
+	BAP *bap.Bap  `json:"BAP,omitempty" bson:"BAP,omitempty"`
+	MAP magic.MAP `json:"MAP,omitempty" bson:"MAP,omitempty"`
+	Run *run.Jig  `json:"Run,omitempty" bson:"Run,omitempty"`
 }
 
 // NewFromBob returns a new BmapTx from a BobTx
@@ -45,8 +43,8 @@ func NewFromTx(tx string) (bmapTx *Tx, err error) {
 func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 	for _, out := range bobTx.Out {
 		for index, tape := range out.Tape {
-			if len(tape.Cell) > 0 {
-				prefixData := tape.Cell[0].S
+			if len(tape.Cell) > 0 && tape.Cell[0].S != nil {
+				prefixData := *tape.Cell[0].S
 				switch prefixData {
 				case run.Prefix:
 					if t.Run, err = run.NewFromTape(tape); err != nil {

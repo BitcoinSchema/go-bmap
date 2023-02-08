@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/libsv/go-bt"
+	"github.com/libsv/go-bt/v2"
 )
 
 var debug = os.Getenv("BMAP_DEBUG") == "1"
@@ -111,7 +111,7 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		}
 
 		if pos == 0 {
-			return nil, fmt.Errorf("Error finding data")
+			return nil, fmt.Errorf("error finding data")
 		}
 
 		// Extract amount
@@ -167,7 +167,7 @@ func NewFromUtxo(utxo *bt.Output, linkedPrevOut *string, linkedPrevOutSig *strin
 		}
 		return sfp, nil
 	}
-	return nil, fmt.Errorf("Not a valid SFP Token! %s %d", protocolBytes, len(scriptParts))
+	return nil, fmt.Errorf("not a valid SFP Token! %s %d", protocolBytes, len(scriptParts))
 
 }
 

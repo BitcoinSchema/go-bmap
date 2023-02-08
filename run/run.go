@@ -1,16 +1,15 @@
 package run
 
 import (
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"strings"
 
-	"github.com/bitcoinschema/go-bob"
-	"github.com/libsv/go-bt"
+	"github.com/bitcoinschema/go-bpu"
+	"github.com/libsv/go-bt/v2"
+	"github.com/libsv/go-bt/v2/bscript"
 )
 
 var debug = os.Getenv("BMAP_DEBUG") == "1"
@@ -67,24 +66,33 @@ type Jig struct {
 func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 
 	jig = &Jig{}
-
-	script, err := utxo.LockingScript.ToASM()
+	lockingScript := *utxo.LockingScript
+	parts, err := bscript.DecodeParts(lockingScript)
 	if err != nil {
 		return nil, err
 	}
 
-	scriptParts := strings.Split(script, " ")
+	// script, err := utxo.LockingScript.ToASM()
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	// scriptParts := strings.Split(script, " ")
 
 	// Collect OP_RETURN data from script
 	var pos = 0
-	var data []string
+	var data [][]byte
 
-	for i, op := range scriptParts {
+	for i, op := range parts {
 		// Find OP_RETURN
-		if op == "OP_RETURN" {
+		if len(op) == 1 && op[0] == 0x6a {
+			fmt.Println("OP_RETURN FOUND")
 			// Turn on collector
 			pos = i
 			continue
+		} else {
+			fmt.Println("WHATEVER FOUND")
+
 		}
 		// Collect data
 		if pos > 0 && i > pos {
@@ -101,9 +109,9 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 
 		switch i {
 		case 0:
-			prefix, err := hex.DecodeString(val)
-			if string(prefix) != Prefix {
-				return nil, fmt.Errorf("Not a valid run Tx: %w", err)
+			log.Printf("Decoding run tx %+v", data)
+			if string(val) != Prefix {
+				return nil, fmt.Errorf("not a valid run Tx: %w", err)
 			}
 		case 1:
 			// TODO: Convert from asm to int
@@ -112,19 +120,16 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 			}
 			jig.Version = 0 // val
 		case 2:
-			appID, err := hex.DecodeString(val)
+			appID := string(val)
 			if err != nil {
-				return nil, fmt.Errorf("Failed to decode app id: %w", err)
+				return nil, fmt.Errorf("failed to decode app id: %w", err)
 			}
 			jig.AppID = string(appID)
 		case 3:
-			payloadBytes, err := hex.DecodeString(val)
-			if err != nil {
-				return nil, fmt.Errorf("Failed to decode payload: %w", err)
-			}
+
 			var payload Payload
 
-			err = json.Unmarshal(payloadBytes, &payload)
+			err = json.Unmarshal(val, &payload)
 			if err != nil {
 				return nil, err
 			}
@@ -138,7 +143,7 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 
 // NewFromTape will create a new AIP object from a bob.Tape
 // Using the FromTape() alone will prevent validation (data is needed via SetData to enable)
-func NewFromTape(tape bob.Tape) (j *Jig, e error) {
+func NewFromTape(tape bpu.Tape) (j *Jig, e error) {
 	j = new(Jig)
 	err := j.FromTape(&tape)
 	if err != nil {
@@ -161,7 +166,7 @@ func (j *Jig) IsToken() bool {
 }
 
 // FromTape sets Jig data from Bob Tape
-func (j *Jig) FromTape(tape *bob.Tape) error {
+func (j *Jig) FromTape(tape *bpu.Tape) error {
 
 	// Run pushdata format:
 	// 0 - run
@@ -170,33 +175,36 @@ func (j *Jig) FromTape(tape *bob.Tape) error {
 	// 3 - json payload
 
 	if len(tape.Cell) == 4 {
-		if tape.Cell[0].S != "run" {
-			return fmt.Errorf("Not a run tape")
+		if tape.Cell[0].S == nil || *tape.Cell[0].S != "run" {
+			return fmt.Errorf("not a run tape %d", 1)
 		}
 
 		// Set the APP ID
 		// TODO APP ID is not set on most run transactions - just OP_FALSE
-		j.AppID = tape.Cell[2].S
-
-		// Set the version
-		// bob parses this in a weird way, it should be just a number, but we can only get the OP_DATA_ hex value
-		version := strings.Replace(tape.Cell[1].H, "OP_DATA_", "", 1)
-		num, err := strconv.ParseInt(version, 16, 64)
-		if err != nil {
-			return err
+		if tape.Cell[2].S != nil {
+			j.AppID = *tape.Cell[2].S
 		}
 
-		j.Version = uint64(num)
+		if tape.Cell[1].Op != nil {
+			// Set the version
+			// bob parses this in a weird way, it should be just a number, but we can only get the OP_DATA_ hex value
+			num := *tape.Cell[1].Op
+
+			j.Version = uint64(num)
+		}
 
 		var payload Payload
-
-		err = json.Unmarshal([]byte(tape.Cell[3].S), &payload)
-		if err != nil {
-			return err
+		if tape.Cell[3].S != nil {
+			jsonStr := *tape.Cell[3].S
+			err := json.Unmarshal([]byte(jsonStr), &payload)
+			if err != nil {
+				return err
+			}
+			j.Payload = payload
 		}
-		j.Payload = payload
+
 	} else {
-		return fmt.Errorf("Pushdata length is incorrect. Got %d expected 4", len(tape.Cell))
+		return fmt.Errorf("pushdata length is incorrect. Got %d expected 4", len(tape.Cell))
 	}
 	return nil
 }

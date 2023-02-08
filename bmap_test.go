@@ -5,11 +5,12 @@ import (
 
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
-	"github.com/bitcoinschema/go-bitcoin"
+	"github.com/bitcoinschema/go-bitcoin/v2"
 	"github.com/bitcoinschema/go-bmap/run"
 	"github.com/bitcoinschema/go-bmap/sfp"
 	"github.com/bitcoinschema/go-bmap/test"
 	"github.com/bitcoinschema/go-bob"
+	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
 )
 
@@ -85,14 +86,19 @@ func TestFromTx(t *testing.T) {
 
 func TestMap(t *testing.T) {
 
-	tape := bob.Tape{
-		Cell: []bob.Cell{
-			{S: magic.Prefix},
-			{S: magic.Set},
-			{S: "keyName1"},
-			{S: "something"},
-			{S: "keyName2"},
-			{S: "something else"},
+	keyName1 := "keyName1"
+	something := "something"
+	keyName2 := "something"
+	somethingElse := "something else"
+
+	tape := bpu.Tape{
+		Cell: []bpu.Cell{
+			{S: &magic.Prefix},
+			{S: &magic.Set},
+			{S: &keyName1},
+			{S: &something},
+			{S: &keyName2},
+			{S: &somethingElse},
 		},
 	}
 
@@ -120,12 +126,16 @@ func TestMapFromRawTxString(t *testing.T) {
 }
 
 func TestRun(t *testing.T) {
-	tape := bob.Tape{
-		Cell: []bob.Cell{
-			{S: "run"},
-			{H: "05"},
-			{S: "cryptofights"},
-			{S: "{\"in\":5,\"ref\":[\"303ab9e7941ad08482f876a4501116c57a2f3eacf8608b3de235525daf81b357_o1\",\"c2c4c971e85b499c29a8ab2148fd324fe12b550b8f4f57658a4686e011d8fd58_o1\",\"cfa749424a1547a169d0b8fc0a54fed8918d2cf46eeea242fd2aebe3c8875a3c_o1\",\"a9082e00bbedfc80986c7821ed0b2a81dd34ad6bbd2a07fd9e5a06394614a957_o1\",\"705d8340b64e73fa9758e7f7799d28da38669fe0e2cb1ce1960abb1a6a26acf3_o1\",\"92f78b159c4e51ad52ed6d041d2253c2683d95d63a1568e3ce1e8ea516bfb962_o1\",\"08f34f29fd07850ca66973784362927523ea7940084fbd3690676b81628f8c07_o1\",\"d67bf5454d02dafcb4350e65899d890a0660e51442dc0c0f6f7b256a85d19eac_o1\",\"14e278c68ff521e0916ad7c713ae4a0156e76361dbd3b2b357dfb6028e0dca7a_o1\",\"01b37806b3ef4d45f0a73bfe10e916d4f280f9628569765e638259afeb15da16_o1\",\"918d80459b2469381fa493c10bb42d0cdca465170b9d8f88d7c85c55940b8bbc_o1\",\"a78f5a6d72f78711e66c6211fbbd0a0bfd15ad91bdd00404928a9facc63da6d9_o1\",\"74a9d9eddee3fada42489b9db04ef362043225d70799cbfa32a0fc425892ad31_o1\",\"3a67cec3c16bdb847b972bee2fc1c0717c59edcae7bf5f48c91feccfa635af33_o1\",\"382713c2b7abf570b1d344ebcf6b7896d8c5d8fd6362735c5fe72ed793829670_o1\"],\"out\":[\"e0eceb4e317aee7e68e39f22724bb6242c6b79e00483cb4b0250469235bb1ce8\",\"6720ce1b1eeb8401a4258aaab51be88f947744b935c9d7d7eed7c1e8306c8dd3\",\"dee4f6758363d2adfb614783305f6135c13f47772231dbb318d795c5d64d2fac\",\"add7d36d4ab36b1b2e922aa0a21500f3e1a89cd99b80a91acc75ffadd9ee248b\",\"fd86dc04c8a6657e3643a6eaa23892a89e87c481243effb3a22b8e118928e103\",\"df77a80e8a1a950a2cbf6dcc717a7ee461e741d8350edb6fb7aaa35fbf59036f\"],\"del\":[],\"cre\":[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\"],\"exec\":[{\"op\":\"NEW\",\"data\":[{\"$jig\":5},[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\",{\"allowBots\":true,\"fee\":0,\"lobby\":5,\"playerCount\":1,\"reward\":0,\"rulesId\":\"bot5\",\"tier\":3},[{\"fighter\":{\"$jig\":0},\"items\":[{\"$jig\":1},{\"$jig\":2},{\"$und\":1},{\"$jig\":3}],\"owner\":\"1Pm9cCc9RnZnAdqbKnXgqbeauRa5nfAejz\",\"pubkey\":\"038630f8220616856e7ebb73847643b4fe39fdcb4d7145b687ed1bb78340c77e08\",\"skills\":[{\"$jig\":7},{\"$jig\":8},{\"$jig\":9},{\"$jig\":10}],\"tags\":[],\"userId\":\"exgen\"},{\"coins\":[],\"fighter\":{\"$jig\":4},\"items\":[],\"pubkey\":\"02c74b8db80b5af8dc9fe14fdc098d3b7073184485471df9cf243330ae8da67a98\",\"skills\":[{\"$dup\":[\"1\",\"2\",\"0\",\"skills\",\"0\"]}],\"tags\":[\"bot\"],\"userId\":\"cryptofights\"}],\"14ad8af5a501229178217f8f85d698fef13ecaa56c80778cc9d9b1faade4030f\",1622457372560]]}]}"},
+	r := "run"
+	zero5 := "05"
+	cryptofights := "cryptofights"
+	data := "{\"in\":5,\"ref\":[\"303ab9e7941ad08482f876a4501116c57a2f3eacf8608b3de235525daf81b357_o1\",\"c2c4c971e85b499c29a8ab2148fd324fe12b550b8f4f57658a4686e011d8fd58_o1\",\"cfa749424a1547a169d0b8fc0a54fed8918d2cf46eeea242fd2aebe3c8875a3c_o1\",\"a9082e00bbedfc80986c7821ed0b2a81dd34ad6bbd2a07fd9e5a06394614a957_o1\",\"705d8340b64e73fa9758e7f7799d28da38669fe0e2cb1ce1960abb1a6a26acf3_o1\",\"92f78b159c4e51ad52ed6d041d2253c2683d95d63a1568e3ce1e8ea516bfb962_o1\",\"08f34f29fd07850ca66973784362927523ea7940084fbd3690676b81628f8c07_o1\",\"d67bf5454d02dafcb4350e65899d890a0660e51442dc0c0f6f7b256a85d19eac_o1\",\"14e278c68ff521e0916ad7c713ae4a0156e76361dbd3b2b357dfb6028e0dca7a_o1\",\"01b37806b3ef4d45f0a73bfe10e916d4f280f9628569765e638259afeb15da16_o1\",\"918d80459b2469381fa493c10bb42d0cdca465170b9d8f88d7c85c55940b8bbc_o1\",\"a78f5a6d72f78711e66c6211fbbd0a0bfd15ad91bdd00404928a9facc63da6d9_o1\",\"74a9d9eddee3fada42489b9db04ef362043225d70799cbfa32a0fc425892ad31_o1\",\"3a67cec3c16bdb847b972bee2fc1c0717c59edcae7bf5f48c91feccfa635af33_o1\",\"382713c2b7abf570b1d344ebcf6b7896d8c5d8fd6362735c5fe72ed793829670_o1\"],\"out\":[\"e0eceb4e317aee7e68e39f22724bb6242c6b79e00483cb4b0250469235bb1ce8\",\"6720ce1b1eeb8401a4258aaab51be88f947744b935c9d7d7eed7c1e8306c8dd3\",\"dee4f6758363d2adfb614783305f6135c13f47772231dbb318d795c5d64d2fac\",\"add7d36d4ab36b1b2e922aa0a21500f3e1a89cd99b80a91acc75ffadd9ee248b\",\"fd86dc04c8a6657e3643a6eaa23892a89e87c481243effb3a22b8e118928e103\",\"df77a80e8a1a950a2cbf6dcc717a7ee461e741d8350edb6fb7aaa35fbf59036f\"],\"del\":[],\"cre\":[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\"],\"exec\":[{\"op\":\"NEW\",\"data\":[{\"$jig\":5},[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\",{\"allowBots\":true,\"fee\":0,\"lobby\":5,\"playerCount\":1,\"reward\":0,\"rulesId\":\"bot5\",\"tier\":3},[{\"fighter\":{\"$jig\":0},\"items\":[{\"$jig\":1},{\"$jig\":2},{\"$und\":1},{\"$jig\":3}],\"owner\":\"1Pm9cCc9RnZnAdqbKnXgqbeauRa5nfAejz\",\"pubkey\":\"038630f8220616856e7ebb73847643b4fe39fdcb4d7145b687ed1bb78340c77e08\",\"skills\":[{\"$jig\":7},{\"$jig\":8},{\"$jig\":9},{\"$jig\":10}],\"tags\":[],\"userId\":\"exgen\"},{\"coins\":[],\"fighter\":{\"$jig\":4},\"items\":[],\"pubkey\":\"02c74b8db80b5af8dc9fe14fdc098d3b7073184485471df9cf243330ae8da67a98\",\"skills\":[{\"$dup\":[\"1\",\"2\",\"0\",\"skills\",\"0\"]}],\"tags\":[\"bot\"],\"userId\":\"cryptofights\"}],\"14ad8af5a501229178217f8f85d698fef13ecaa56c80778cc9d9b1faade4030f\",1622457372560]]}]}"
+	tape := bpu.Tape{
+		Cell: []bpu.Cell{
+			{S: &r},
+			{H: &zero5},
+			{S: &cryptofights},
+			{S: &data},
 		},
 	}
 
@@ -192,12 +202,17 @@ func TestSFP(t *testing.T) {
 }
 
 func TestB(t *testing.T) {
-	tape := bob.Tape{
-		Cell: []bob.Cell{
-			{S: b.Prefix},
-			{S: "Hello world"},
-			{S: "text/plain"},
-			{S: "utf8"},
+
+	helloWorld := "Hello world"
+	mimeType := "text/plain"
+	encoding := "utf8"
+	prefix := b.Prefix
+	tape := bpu.Tape{
+		Cell: []bpu.Cell{
+			{S: &prefix},
+			{S: &helloWorld},
+			{S: &mimeType},
+			{S: &encoding},
 		},
 	}
 	bTx, err := b.NewFromTape(tape)
