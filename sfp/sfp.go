@@ -1,3 +1,4 @@
+// Package sfp is for simple fabriik protocol tokens
 package sfp
 
 import (

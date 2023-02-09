@@ -1,3 +1,4 @@
+// Package bmap detects known data protocols within Bitcoin transactions
 package bmap
 
 import (
