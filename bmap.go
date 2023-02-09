@@ -47,11 +47,11 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 				prefixData := *tape.Cell[0].S
 				switch prefixData {
 				case run.Prefix:
-					if runOut, err := run.NewFromTape(tape); err != nil {
+					var runOut *run.Jig
+					if runOut, err = run.NewFromTape(tape); err != nil {
 						return err
-					} else {
-						t.Run = append(t.Run, runOut)
 					}
+					t.Run = append(t.Run, runOut)
 					continue
 				case aip.Prefix:
 					aipOut := aip.NewFromTape(tape)
@@ -59,25 +59,25 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 					t.AIP = append(t.AIP, aipOut)
 					continue
 				case bap.Prefix:
-					if bapOut, err := bap.NewFromTape(&out.Tape[index]); err != nil {
+					var bapOut *bap.Bap
+					if bapOut, err = bap.NewFromTape(&out.Tape[index]); err != nil {
 						return err
-					} else {
-						t.BAP = append(t.BAP, bapOut)
 					}
+					t.BAP = append(t.BAP, bapOut)
 					continue
 				case magic.Prefix:
-					if mapOut, err := magic.NewFromTape(&out.Tape[index]); err != nil {
+					var mapOut magic.MAP
+					if mapOut, err = magic.NewFromTape(&out.Tape[index]); err != nil {
 						return err
-					} else {
-						t.MAP = append(t.MAP, mapOut)
 					}
+					t.MAP = append(t.MAP, mapOut)
 					continue
 				case b.Prefix:
-					if bOut, err := b.NewFromTape(out.Tape[index]); err != nil {
+					var bOut *b.B
+					if bOut, err = b.NewFromTape(out.Tape[index]); err != nil {
 						return err
-					} else {
-						t.B = append(t.B, bOut)
 					}
+					t.B = append(t.B, bOut)
 					continue
 				}
 			}
