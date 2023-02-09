@@ -13,11 +13,11 @@ import (
 // Tx is a Bmap formatted tx// Tx is a Bmap formatted tx
 type Tx struct {
 	bpu.BpuTx
-	AIP *aip.Aip  `json:"AIP,omitempty" bson:"AIP,omitempty"`
-	B   *b.B      `json:"B,omitempty" bson:"B,omitempty"`
-	BAP *bap.Bap  `json:"BAP,omitempty" bson:"BAP,omitempty"`
-	MAP magic.MAP `json:"MAP,omitempty" bson:"MAP,omitempty"`
-	Run *run.Jig  `json:"Run,omitempty" bson:"Run,omitempty"`
+	AIP []*aip.Aip  `json:"AIP,omitempty" bson:"AIP,omitempty"`
+	B   []*b.B      `json:"B,omitempty" bson:"B,omitempty"`
+	BAP []*bap.Bap  `json:"BAP,omitempty" bson:"BAP,omitempty"`
+	MAP []magic.MAP `json:"MAP,omitempty" bson:"MAP,omitempty"`
+	Run []*run.Jig  `json:"Run,omitempty" bson:"Run,omitempty"`
 }
 
 // NewFromBob returns a new BmapTx from a BobTx
@@ -47,24 +47,38 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 				prefixData := *tape.Cell[0].S
 				switch prefixData {
 				case run.Prefix:
-					if t.Run, err = run.NewFromTape(tape); err != nil {
-						return
+					if runOut, err := run.NewFromTape(tape); err != nil {
+						return err
+					} else {
+						t.Run = append(t.Run, runOut)
 					}
+					continue
 				case aip.Prefix:
-					t.AIP = aip.NewFromTape(tape)
-					t.AIP.SetDataFromTapes(out.Tape)
+					aipOut := aip.NewFromTape(tape)
+					aipOut.SetDataFromTapes(out.Tape)
+					t.AIP = append(t.AIP, aipOut)
+					continue
 				case bap.Prefix:
-					if t.BAP, err = bap.NewFromTape(&out.Tape[index]); err != nil {
-						return
+					if bapOut, err := bap.NewFromTape(&out.Tape[index]); err != nil {
+						return err
+					} else {
+						t.BAP = append(t.BAP, bapOut)
 					}
+					continue
 				case magic.Prefix:
-					if t.MAP, err = magic.NewFromTape(&out.Tape[index]); err != nil {
-						return
+					if mapOut, err := magic.NewFromTape(&out.Tape[index]); err != nil {
+						return err
+					} else {
+						t.MAP = append(t.MAP, mapOut)
 					}
+					continue
 				case b.Prefix:
-					if t.B, err = b.NewFromTape(out.Tape[index]); err != nil {
-						return
+					if bOut, err := b.NewFromTape(out.Tape[index]); err != nil {
+						return err
+					} else {
+						t.B = append(t.B, bOut)
 					}
+					continue
 				}
 			}
 		}

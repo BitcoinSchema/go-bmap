@@ -36,7 +36,7 @@ func TestFromBob(t *testing.T) {
 	}
 
 	mapData := bmapData.MAP
-	if mapData["app"] != "2paymail" {
+	if mapData[0]["app"] != "2paymail" {
 		t.Fatalf("test fromBob failed %+v", mapData)
 	}
 
@@ -64,7 +64,7 @@ func TestFromTx(t *testing.T) {
 		}
 
 		mapData := bmapData.MAP
-		if mapData["app"] != "tonicpow" {
+		if mapData[0]["app"] != "tonicpow" {
 			t.Fatalf("test fromTx failed %+v", mapData)
 		}
 	})
@@ -81,7 +81,7 @@ func TestFromTx(t *testing.T) {
 		}
 
 		runData := bmapData.Run
-		if runData.Payload.Out[0] != "021d664381a520d4cd987276838f5c93fa57c985bf15a4c79ee7c92d919d772c" {
+		if runData[0].Payload.Out[0] != "021d664381a520d4cd987276838f5c93fa57c985bf15a4c79ee7c92d919d772c" {
 			t.Fatalf("failed parsing run data %+v", runData)
 		}
 	})
@@ -235,11 +235,11 @@ func TestNewFromBob(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
-	if bMap.BAP.Type != bap.ATTEST {
-		t.Fatalf("expected: %s but got: %s", bap.ATTEST, bMap.BAP.Type)
+	if bMap.BAP[0].Type != bap.ATTEST {
+		t.Fatalf("expected: %s but got: %s", bap.ATTEST, bMap.BAP[0].Type)
 	}
-	if bMap.AIP.Signature != "H+lubfcz5Z2oG8B7HwmP8Z+tALP+KNOPgedo7UTXwW8LBpMkgCgatCdpvbtf7wZZQSIMz83emmAvVS4S3F5X1wo=" {
-		t.Fatalf("expected: %s but got: %s", "H+lubfcz5Z2oG8B7HwmP8Z+tALP+KNOPgedo7UTXwW8LBpMkgCgatCdpvbtf7wZZQSIMz83emmAvVS4S3F5X1wo=", bMap.AIP.Signature)
+	if bMap.AIP[0].Signature != "H+lubfcz5Z2oG8B7HwmP8Z+tALP+KNOPgedo7UTXwW8LBpMkgCgatCdpvbtf7wZZQSIMz83emmAvVS4S3F5X1wo=" {
+		t.Fatalf("expected: %s but got: %s", "H+lubfcz5Z2oG8B7HwmP8Z+tALP+KNOPgedo7UTXwW8LBpMkgCgatCdpvbtf7wZZQSIMz83emmAvVS4S3F5X1wo=", bMap.AIP[0].Signature)
 	}
 }
 
@@ -254,10 +254,13 @@ func TestNewFromRawTxString(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
-	if bMap.B.MediaType != "image/gif" {
-		t.Fatalf("expected: image/gif but got: %s", bMap.B.MediaType)
+	if bMap.B[1].MediaType != "image/gif" {
+		t.Fatalf("expected: image/gif but got: %s", bMap.B[1].MediaType)
 	}
-	if bMap.AIP.Signature != "HwGOmQsMhgz4U6EqWk2Kd5SyFMIf14sjLzTOlCBBwCvlckDAuR743e+gMUUP63letFQH7zZY3u6y6r19X35u4yA=" {
-		t.Fatalf("expected: %s but got: %s", "HwGOmQsMhgz4U6EqWk2Kd5SyFMIf14sjLzTOlCBBwCvlckDAuR743e+gMUUP63letFQH7zZY3u6y6r19X35u4yA=", bMap.AIP.Signature)
+	if bMap.B[0].MediaType != "text/markdown" {
+		t.Fatalf("expected: text/markdown but got: %s", bMap.B[0].MediaType)
+	}
+	if bMap.AIP[0].Signature != "HwGOmQsMhgz4U6EqWk2Kd5SyFMIf14sjLzTOlCBBwCvlckDAuR743e+gMUUP63letFQH7zZY3u6y6r19X35u4yA=" {
+		t.Fatalf("expected: %s but got: %s", "HwGOmQsMhgz4U6EqWk2Kd5SyFMIf14sjLzTOlCBBwCvlckDAuR743e+gMUUP63letFQH7zZY3u6y6r19X35u4yA=", bMap.AIP[0].Signature)
 	}
 }
