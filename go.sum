@@ -14,6 +14,8 @@ github.com/bitcoinschema/go-bob v0.3.1/go.mod h1:76l1qp651EjzxO8EhJSb+i6UcTDQ7hS
 github.com/bitcoinschema/go-bob v0.3.2/go.mod h1:ENT+iU50YGrJ8Swi/Wi7/XlBrqUYamM/Ldx3YLYQQ0E=
 github.com/bitcoinschema/go-bob v0.3.3 h1:2DBWMT5LrxzD/k876gTgchTY0z3npSRes5CG+Chdrzw=
 github.com/bitcoinschema/go-bob v0.3.3/go.mod h1:u381SnwMDRJqbUIZxredI9sdl6J4WYMRteDWqTcqzQQ=
+github.com/bitcoinschema/go-boost v0.0.1 h1:yDBIUEjDc51HPPdag4WgAnHvFFEZUsBOGfOGdBlrGkc=
+github.com/bitcoinschema/go-boost v0.0.1/go.mod h1:Z+15n8CgM1VV1Cx8CQOAo/RFUn0lXqk5OzrmtI2gyI0=
 github.com/bitcoinschema/go-bpu v0.0.3/go.mod h1:i41D9NP5KIk/oCt8XrRhN27YerZCUG6vjScXDhNn5Us=
 github.com/bitcoinschema/go-bpu v0.0.4 h1:EapuVhZcRD8ZOqBCcHUdzaMGOUmabvuXc6EvONBn5Mc=
 github.com/bitcoinschema/go-bpu v0.0.4/go.mod h1:i41D9NP5KIk/oCt8XrRhN27YerZCUG6vjScXDhNn5Us=

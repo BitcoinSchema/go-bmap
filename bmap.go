@@ -5,20 +5,25 @@ import (
 	"github.com/bitcoinschema/go-aip"
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
+	"github.com/bitcoinschema/go-bmap/ord"
 	"github.com/bitcoinschema/go-bmap/run"
 	"github.com/bitcoinschema/go-bob"
+	"github.com/bitcoinschema/go-boost"
 	"github.com/bitcoinschema/go-bpu"
+
 	magic "github.com/bitcoinschema/go-map"
 )
 
 // Tx is a Bmap formatted tx// Tx is a Bmap formatted tx
 type Tx struct {
 	bpu.BpuTx
-	AIP []*aip.Aip  `json:"AIP,omitempty" bson:"AIP,omitempty"`
-	B   []*b.B      `json:"B,omitempty" bson:"B,omitempty"`
-	BAP []*bap.Bap  `json:"BAP,omitempty" bson:"BAP,omitempty"`
-	MAP []magic.MAP `json:"MAP,omitempty" bson:"MAP,omitempty"`
-	Run []*run.Jig  `json:"Run,omitempty" bson:"Run,omitempty"`
+	AIP   []*aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
+	B     []*b.B         `json:"B,omitempty" bson:"B,omitempty"`
+	BAP   []*bap.Bap     `json:"BAP,omitempty" bson:"BAP,omitempty"`
+	BOOST []*boost.Boost `json:"BOOST,omitempty" bson:"BOOST,omitempty"`
+	MAP   []magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
+	Run   []*run.Jig     `json:"Run,omitempty" bson:"Run,omitempty"`
+	Ord   []*ord.Ordinal `json:"Ord,omitempty" bson:"Ord,omitempty"`
 }
 
 // NewFromBob returns a new BmapTx from a BobTx
@@ -73,12 +78,24 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 					}
 					t.MAP = append(t.MAP, mapOut)
 					continue
+				case boost.Prefix:
+					var boostOut *boost.Boost
+					if boostOut, err = boost.NewFromTape(&out.Tape[index]); err != nil {
+						return err
+					}
+					t.BOOST = append(t.BOOST, boostOut)
+					continue
 				case b.Prefix:
 					var bOut *b.B
 					if bOut, err = b.NewFromTape(out.Tape[index]); err != nil {
 						return err
 					}
 					t.B = append(t.B, bOut)
+					continue
+				case ord.Prefix:
+					t.Ord = append(t.Ord, &ord.Ordinal{
+						Inscription: true,
+					})
 					continue
 				}
 			}

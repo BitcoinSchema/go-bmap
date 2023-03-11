@@ -264,3 +264,23 @@ func TestNewFromRawTxString(t *testing.T) {
 		t.Fatalf("expected: %s but got: %s", "HwGOmQsMhgz4U6EqWk2Kd5SyFMIf14sjLzTOlCBBwCvlckDAuR743e+gMUUP63letFQH7zZY3u6y6r19X35u4yA=", bMap.AIP[0].Signature)
 	}
 }
+
+func TestNewOrdFromRawTxString(t *testing.T) {
+	testHex := test.GetTestHex("./test/tx/ord.hex")
+	bobTx, err := bob.NewFromRawTxString(testHex)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	var bMap *Tx
+	bMap, err = NewFromBob(bobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+
+	if bMap.B[0].MediaType != "model/gltf-binary" {
+		t.Fatalf("expected: model/gltf-binary but got: %s", bMap.B[0].MediaType)
+	}
+	// if bMap.AIP[0].Signature != "HwGOmQsMhgz4U6EqWk2Kd5SyFMIf14sjLzTOlCBBwCvlckDAuR743e+gMUUP63letFQH7zZY3u6y6r19X35u4yA=" {
+	// 	t.Fatalf("expected: %s but got: %s", "HwGOmQsMhgz4U6EqWk2Kd5SyFMIf14sjLzTOlCBBwCvlckDAuR743e+gMUUP63letFQH7zZY3u6y6r19X35u4yA=", bMap.AIP[0].Signature)
+	// }
+}
