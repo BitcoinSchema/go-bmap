@@ -1,4 +1,5 @@
 # go-bmap
+
 > Go version of the [bmap js library](https://github.com/rohenaz/bmap/) for working with OP_RETURN protocols
 
 [![Release](https://img.shields.io/github/release-pre/BitcoinSchema/go-bmap.svg?logo=github&style=flat&v=3)](https://github.com/BitcoinSchema/go-bmap/releases)
@@ -14,6 +15,7 @@
 <br/>
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [Examples & Tests](#examples--tests)
@@ -29,6 +31,7 @@
 ## Installation
 
 **go-bmap** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy).
+
 ```shell script
 go get -u github.com/bitcoinschema/go-bmap
 ```
@@ -36,17 +39,20 @@ go get -u github.com/bitcoinschema/go-bmap
 <br/>
 
 ## Documentation
+
 View the generated [documentation](https://pkg.go.dev/github.com/bitcoinschema/go-bmap)
 
 [![GoDoc](https://godoc.org/github.com/bitcoinschema/go-bmap?status.svg&style=flat&v=3)](https://pkg.go.dev/github.com/bitcoinschema/go-bmap)
 
 ### Features
+
 - [NewFromBob()](bmap.go)
 - Supported Protocols:
-    - [AIP](https://github.com/bitcoinschema/go-aip)
-    - [B](https://github.com/bitcoinschema/go-b)
-    - [BAP](https://github.com/bitcoinschema/go-bap)
-    - [MAP](https://github.com/bitcoinschema/go-map)
+  - [AIP](https://github.com/bitcoinschema/go-aip)
+  - [B](https://github.com/bitcoinschema/go-b)
+  - [BAP](https://github.com/bitcoinschema/go-bap)
+  - [MAP](https://github.com/bitcoinschema/go-map)
+  - [Ord](https://github.com/bitcoinschema/1sat-ordinals)
 
 <details>
 <summary><strong><code>Package Dependencies</code></strong></summary>
@@ -68,6 +74,7 @@ View the generated [documentation](https://pkg.go.dev/github.com/bitcoinschema/g
 The [.goreleaser.yml](.goreleaser.yml) file is used to configure [goreleaser](https://github.com/goreleaser/goreleaser).
 
 Use `make release-snap` to create a snapshot version of the release, and finally `make release` to ship to production.
+
 </details>
 
 <details>
@@ -75,11 +82,13 @@ Use `make release-snap` to create a snapshot version of the release, and finally
 <br/>
 
 View all `makefile` commands
+
 ```shell script
 make help
 ```
 
 List of all current commands:
+
 ```text
 all                   Runs multiple commands
 clean                 Remove previous builds and any test cache data
@@ -112,20 +121,24 @@ uninstall             Uninstall the application (and remove files)
 update-linter         Update the golangci-lint package (macOS only)
 vet                   Run the Go vet application
 ```
+
 </details>
 
 <br/>
 
 ## Examples & Tests
+
 All unit tests run via [GitHub Actions](https://github.com/BitcoinSchema/go-bmap/actions) and
 uses [Go version 1.17.x](https://golang.org/doc/go1.17). View the [configuration file](.github/workflows/run-tests.yml).
 
 Run all tests (including integration tests)
+
 ```shell script
 make test
 ```
 
 Run tests (excluding integration tests)
+
 ```shell script
 make test-short
 ```
@@ -133,7 +146,9 @@ make test-short
 <br/>
 
 ## Benchmarks
+
 Run the Go benchmarks:
+
 ```shell script
 make bench
 ```
@@ -141,12 +156,15 @@ make bench
 <br/>
 
 ## Code Standards
+
 Read more about this Go project's [code standards](.github/CODE_STANDARDS.md).
 
 <br/>
 
 ## Usage
+
 Mongo Insert Example:
+
 ```go
 bmapData, err := bmap.NewFromString(bobData)
 
@@ -175,8 +193,9 @@ _, err := conn.InsertOne(collectionName, bsonData)
 <br/>
 
 ## Maintainers
+
 | [<img src="https://github.com/rohenaz.png" height="50" alt="MrZ" />](https://github.com/rohenaz) | [<img src="https://github.com/mrz1836.png" height="50" alt="MrZ" />](https://github.com/mrz1836) |
-|:------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------:|
+| :----------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
 |                              [Satchmo](https://github.com/rohenaz)                               |                                [MrZ](https://github.com/mrz1836)                                 |
 
 <br/>
@@ -186,6 +205,7 @@ _, err := conn.InsertOne(collectionName, bsonData)
 View the [contributing guidelines](.github/CONTRIBUTING.md) and follow the [code of conduct](.github/CODE_OF_CONDUCT.md).
 
 ### How can I help?
+
 All kinds of contributions are welcome :raised_hands:!
 The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon:.
 You can also support this project by [becoming a sponsor on GitHub](https://github.com/sponsors/BitcoinSchema) :clap:
