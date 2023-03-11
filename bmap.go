@@ -10,11 +10,10 @@ import (
 	"github.com/bitcoinschema/go-bob"
 	"github.com/bitcoinschema/go-boost"
 	"github.com/bitcoinschema/go-bpu"
-
 	magic "github.com/bitcoinschema/go-map"
 )
 
-// Tx is a Bmap formatted tx// Tx is a Bmap formatted tx
+// Tx is a Bmap formatted tx
 type Tx struct {
 	bpu.BpuTx
 	AIP   []*aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
