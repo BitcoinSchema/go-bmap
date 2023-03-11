@@ -1,3 +1,4 @@
+// Package run is for parsing 1sat ordinals
 package ord
 
 // Prefix is the OP_RETURN prefix for the 1Sat Ordinals inscription protocol
