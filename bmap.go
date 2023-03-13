@@ -2,6 +2,8 @@
 package bmap
 
 import (
+	"encoding/base64"
+
 	"github.com/bitcoinschema/go-aip"
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
@@ -48,6 +50,7 @@ func NewFromTx(tx string) (bmapTx *Tx, err error) {
 func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 	for _, out := range bobTx.Out {
 		for index, tape := range out.Tape {
+			// Handle string prefixes
 			if len(tape.Cell) > 0 && tape.Cell[0].S != nil {
 				prefixData := *tape.Cell[0].S
 				switch prefixData {
@@ -91,10 +94,35 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 					}
 					t.B = append(t.B, bOut)
 					continue
-				case ord.Prefix:
-					t.Ord = append(t.Ord, &ord.Ordinal{
-						Inscription: true,
-					})
+				}
+			}
+			// Handle OPCODE prefixes
+			if len(tape.Cell) > 5 && tape.Cell[0].Ops != nil {
+				switch *tape.Cell[0].Ops {
+				case "OP_DUP":
+					minOrdScriptPushes := 13
+					if len(tape.Cell) >= minOrdScriptPushes {
+						prefix := tape.Cell[7].S
+						if prefix != nil && *prefix == "ord" {
+							data := tape.Cell[9].B
+							if data != nil {
+								var dataBytes []byte
+								dataBytes, err = base64.StdEncoding.DecodeString(*data)
+								if err != nil {
+									return
+								}
+								contentType := tape.Cell[11].S
+								if contentType != nil {
+									t.Ord = append(t.Ord, &ord.Ordinal{
+										Data:        dataBytes,
+										ContentType: *contentType,
+									})
+								}
+
+							}
+
+						}
+					}
 					continue
 				}
 			}

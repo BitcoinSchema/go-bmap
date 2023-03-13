@@ -6,5 +6,6 @@ const Prefix string = "ord"
 
 // Ordinal tells wether an inscription is found
 type Ordinal struct {
-	Inscription bool
+	Data        []byte
+	ContentType string
 }

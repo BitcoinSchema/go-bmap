@@ -277,7 +277,7 @@ func TestNewOrdFromRawTxString(t *testing.T) {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
 
-	if bMap.B[0].MediaType != "model/gltf-binary" {
+	if bMap.Ord[0].ContentType != "model/gltf-binary" {
 		t.Fatalf("expected: model/gltf-binary but got: %s", bMap.B[0].MediaType)
 	}
 
