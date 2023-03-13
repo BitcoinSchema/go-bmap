@@ -143,7 +143,6 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 }
 
 // NewFromTape will create a new AIP object from a bob.Tape
-// Using the FromTape() alone will prevent validation (data is needed via SetData to enable)
 func NewFromTape(tape bpu.Tape) (j *Jig, e error) {
 	j = new(Jig)
 	err := j.FromTape(&tape)

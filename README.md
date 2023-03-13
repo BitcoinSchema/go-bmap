@@ -1,6 +1,6 @@
 # go-bmap
 
-> Go version of the [bmap js library](https://github.com/rohenaz/bmap/) for working with OP_RETURN protocols
+> Go version of the [bmap js library](https://github.com/rohenaz/bmap/) for working with data protocols
 
 [![Release](https://img.shields.io/github/release-pre/BitcoinSchema/go-bmap.svg?logo=github&style=flat&v=3)](https://github.com/BitcoinSchema/go-bmap/releases)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/BitcoinSchema/go-bmap/run-tests.yml?branch=master&logo=github&v=3)](https://github.com/BitcoinSchema/go-bmap/actions)

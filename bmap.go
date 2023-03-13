@@ -2,8 +2,6 @@
 package bmap
 
 import (
-	"encoding/base64"
-
 	"github.com/bitcoinschema/go-aip"
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
@@ -104,23 +102,11 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 					if len(tape.Cell) >= minOrdScriptPushes {
 						prefix := tape.Cell[7].S
 						if prefix != nil && *prefix == "ord" {
-							data := tape.Cell[9].B
-							if data != nil {
-								var dataBytes []byte
-								dataBytes, err = base64.StdEncoding.DecodeString(*data)
-								if err != nil {
-									return
-								}
-								contentType := tape.Cell[11].S
-								if contentType != nil {
-									t.Ord = append(t.Ord, &ord.Ordinal{
-										Data:        dataBytes,
-										ContentType: *contentType,
-									})
-								}
-
+							var ordOut *ord.Ordinal
+							if ordOut, err = ord.NewFromTape(out.Tape[index]); err != nil {
+								return err
 							}
-
+							t.Ord = append(t.Ord, ordOut)
 						}
 					}
 					continue
