@@ -283,6 +283,51 @@ func TestNewOrdFromRawTxString(t *testing.T) {
 
 }
 
+func TestBadTape(t *testing.T) {
+	testHex := test.GetTestHex("./test/tx/boost.hex")
+	bobTx, err := bob.NewFromRawTxString(testHex)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	bPrefix := b.Prefix
+	bobTx.Out = []bpu.Output{
+		{
+			XPut: bpu.XPut{
+				I: 0,
+				Tape: []bpu.Tape{{
+					Cell: []bpu.Cell{{
+						H:   nil,
+						S:   &bPrefix,
+						B:   nil,
+						Op:  nil,
+						Ops: nil,
+						I:   0,
+						II:  0,
+						LS:  nil,
+						LB:  nil,
+					}},
+					I: 0,
+				}},
+				E: bpu.E{
+					A: nil,
+					V: nil,
+					I: 0,
+					H: nil,
+				},
+			},
+		}}
+	bobTx.In = []bpu.Input{}
+
+	bMap, err := NewFromBob(bobTx)
+	if err == nil {
+		t.Fatal("an error was expected")
+	}
+	if bMap != nil {
+		t.Fatal("bmap tx was not nil", err)
+	}
+
+}
+
 func TestNewBoostFromRawTxString(t *testing.T) {
 	testHex := test.GetTestHex("./test/tx/boost.hex")
 	bobTx, err := bob.NewFromRawTxString(testHex)

@@ -29,6 +29,9 @@ type Tx struct {
 func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
 	bmapTx = new(Tx)
 	err = bmapTx.FromBob(bobTx)
+	if err != nil {
+		bmapTx = nil
+	}
 	return
 }
 
