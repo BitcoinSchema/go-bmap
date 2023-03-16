@@ -14,6 +14,7 @@ const Prefix string = "ord"
 type Ordinal struct {
 	Data        []byte
 	ContentType string
+	Vout        uint8
 }
 
 // FromTape sets the ordinal data from a bpu.Tape
@@ -28,6 +29,7 @@ func (o *Ordinal) FromTape(tape *bpu.Tape) (err error) {
 		}
 		o.Data = dataBytes
 		o.ContentType = *contentType
+		o.Vout = tape.I
 	}
 	return
 }
