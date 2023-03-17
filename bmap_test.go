@@ -345,3 +345,60 @@ func TestNewBoostFromRawTxString(t *testing.T) {
 	}
 
 }
+
+func TestBreakerFromRawTxString(t *testing.T) {
+	testHex := test.GetTestHex("./test/tx/b9c57c18677922e206325d03dabb566a3dfd5eaf674232c2b53554e7d5abe32b.hex")
+	bobTx, err := bob.NewFromRawTxString(testHex)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	var bMap *Tx
+	bMap, err = NewFromBob(bobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+
+	if bMap.Tx.H != "b9c57c18677922e206325d03dabb566a3dfd5eaf674232c2b53554e7d5abe32b" {
+		t.Fatalf("expected: %s  but got: %s", "b9c57c18677922e206325d03dabb566a3dfd5eaf674232c2b53554e7d5abe32b", bMap.Tx.H)
+	}
+
+}
+
+func TestBreaker3FromRawTxString(t *testing.T) {
+	testHex := test.GetTestHex("./test/tx/662104c5bb6a9e912f260795f5d770e670f0a966bc6fd89fe8c0e88fc78e8378.hex")
+	bobTx, err := bob.NewFromRawTxString(testHex)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	var bMap *Tx
+	bMap, err = NewFromBob(bobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+
+	if bMap.Tx.H != "662104c5bb6a9e912f260795f5d770e670f0a966bc6fd89fe8c0e88fc78e8378" {
+		t.Fatalf("expected: %s  but got: %s", "662104c5bb6a9e912f260795f5d770e670f0a966bc6fd89fe8c0e88fc78e8378", bMap.Tx.H)
+	}
+
+	if bMap.Ord == nil {
+		t.Fatalf("no ord found")
+	}
+}
+
+func TestBreaker2FromRawTxString(t *testing.T) {
+	testHex := test.GetTestHex("./test/tx/75a307aa68182d06a079fb2274a5ca439c1f5cc93f01fed3dd5dee6a407ba21c.hex")
+	bobTx, err := bob.NewFromRawTxString(testHex)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	var bMap *Tx
+	bMap, err = NewFromBob(bobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+
+	if bMap.Tx.H != "75a307aa68182d06a079fb2274a5ca439c1f5cc93f01fed3dd5dee6a407ba21c" {
+		t.Fatalf("expected: %s  but got: %s", "75a307aa68182d06a079fb2274a5ca439c1f5cc93f01fed3dd5dee6a407ba21c", bMap.Tx.H)
+	}
+
+}
