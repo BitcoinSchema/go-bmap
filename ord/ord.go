@@ -70,6 +70,7 @@ func NewFromTape(tape bpu.Tape) (o *Ordinal, e error) {
 	return o, nil
 }
 
+// OrdScriptFromTape finds the script: OP_0 OP_IF ... OP_ENDIF
 func OrdScriptFromTape(tape bpu.Tape) (ordScript []bpu.Cell) {
 
 	startIdx := 0
