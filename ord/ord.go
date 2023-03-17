@@ -21,7 +21,7 @@ type Ordinal struct {
 // FromTape sets the ordinal data from a bpu.Tape
 func (o *Ordinal) FromTape(tape *bpu.Tape) (err error) {
 
-	ordScript := OrdScriptFromTape(*tape)
+	ordScript := ScriptFromTape(*tape)
 	minOrdScriptPushes := 7
 	if len(ordScript) == minOrdScriptPushes {
 		prefix := ordScript[2].S
@@ -70,8 +70,8 @@ func NewFromTape(tape bpu.Tape) (o *Ordinal, e error) {
 	return o, nil
 }
 
-// OrdScriptFromTape finds the script: OP_0 OP_IF ... OP_ENDIF
-func OrdScriptFromTape(tape bpu.Tape) (ordScript []bpu.Cell) {
+// ScriptFromTape finds the script: OP_0 OP_IF ... OP_ENDIF
+func ScriptFromTape(tape bpu.Tape) (ordScript []bpu.Cell) {
 
 	startIdx := 0
 	endIdx := 0

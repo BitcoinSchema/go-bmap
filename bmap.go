@@ -99,7 +99,7 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 			}
 			// Handle OPCODE prefixes
 			if len(tape.Cell) > 5 && tape.Cell[0].Ops != nil {
-				ordScript := ord.OrdScriptFromTape(tape)
+				ordScript := ord.ScriptFromTape(tape)
 				if len(ordScript) > 0 {
 
 					var ordOut *ord.Ordinal
