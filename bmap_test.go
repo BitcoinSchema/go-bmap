@@ -46,7 +46,7 @@ func TestFromTx(t *testing.T) {
 
 	t.Run("error", func(t *testing.T) {
 		tx := ""
-		_, err := NewFromTxRawTxString(tx)
+		_, err := NewFromRawTxString(tx)
 		if err == nil {
 			t.Fatalf("error should occur")
 		}
