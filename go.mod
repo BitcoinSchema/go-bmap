@@ -9,7 +9,7 @@ require (
 	github.com/bitcoinschema/go-bitcoin/v2 v2.0.3
 	github.com/bitcoinschema/go-bob v0.3.3
 	github.com/bitcoinschema/go-boost v0.0.1
-	github.com/bitcoinschema/go-bpu v0.0.4
+	github.com/bitcoinschema/go-bpu v0.0.5
 	github.com/bitcoinschema/go-map v0.0.16
 	github.com/libsv/go-bt/v2 v2.1.1
 )
