@@ -17,6 +17,7 @@ import (
 
 var cryptofights = "cryptofights"
 var something = "something"
+var tpowStr = "tonicpow"
 
 func TestFromBob(t *testing.T) {
 
@@ -65,7 +66,7 @@ func TestFromTx(t *testing.T) {
 		}
 
 		mapData := bmapData.MAP
-		if mapData[0]["app"] != "tonicpow" {
+		if mapData[0]["app"] != tpowStr {
 			t.Fatalf("test fromTx failed %+v", mapData)
 		}
 	})
@@ -124,7 +125,7 @@ func TestMapFromRawTxString(t *testing.T) {
 	m, err := magic.NewFromTape(&bob.Out[3].Tape[1])
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if m["CMD"] != "SET" && m["app"] != "tonicpow" {
+	} else if m["CMD"] != "SET" && m["app"] != tpowStr {
 		t.Fatalf("SET Failed %v", m)
 	}
 }
@@ -138,7 +139,7 @@ func TestMapFromTx(t *testing.T) {
 	bmapTx, err := NewFromTx(tx)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if bmapTx.MAP[0]["CMD"] != "SET" && bmapTx.MAP[0]["app"] != "tonicpow" {
+	} else if bmapTx.MAP[0]["CMD"] != "SET" && bmapTx.MAP[0]["app"] != tpowStr {
 		t.Fatalf("SET Failed %v", bmapTx)
 	}
 }
