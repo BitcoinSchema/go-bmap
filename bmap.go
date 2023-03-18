@@ -99,21 +99,17 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 			}
 			// Handle OPCODE prefixes
 			if len(tape.Cell) > 5 && tape.Cell[0].Ops != nil {
-				switch *tape.Cell[0].Ops {
-				case "OP_DUP":
-					minOrdScriptPushes := 13
-					if len(tape.Cell) >= minOrdScriptPushes {
-						prefix := tape.Cell[7].S
-						if prefix != nil && *prefix == "ord" {
-							var ordOut *ord.Ordinal
-							if ordOut, err = ord.NewFromTape(out.Tape[index]); err != nil {
-								return err
-							}
-							t.Ord = append(t.Ord, ordOut)
-						}
+				ordScript := ord.ScriptFromTape(tape)
+				if len(ordScript) > 0 {
+
+					var ordOut *ord.Ordinal
+					if ordOut, err = ord.NewFromTape(out.Tape[index]); err != nil {
+						return err
 					}
-					continue
+					t.Ord = append(t.Ord, ordOut)
+
 				}
+
 			}
 		}
 
