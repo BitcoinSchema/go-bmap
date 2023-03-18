@@ -11,6 +11,7 @@ import (
 	"github.com/bitcoinschema/go-boost"
 	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
+	"github.com/libsv/go-bt/v2"
 )
 
 // Tx is a Bmap formatted tx
@@ -35,8 +36,20 @@ func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
 	return
 }
 
-// NewFromTx returns a new BmapTx from a hex string
-func NewFromTx(tx string) (bmapTx *Tx, err error) {
+// NewFromTx returns a new BmapTx from a a *bt.Tx
+func NewFromTx(tx *bt.Tx) (bmapTx *Tx, err error) {
+	var bobTx *bob.Tx
+	if bobTx, err = bob.NewFromTx(tx); err != nil {
+		return
+	}
+
+	bmapTx = new(Tx)
+	err = bmapTx.FromBob(bobTx)
+	return
+}
+
+// NewFromRawTxString returns a new BmapTx from a hex string
+func NewFromRawTxString(tx string) (bmapTx *Tx, err error) {
 	var bobTx *bob.Tx
 	if bobTx, err = bob.NewFromRawTxString(tx); err != nil {
 		return
