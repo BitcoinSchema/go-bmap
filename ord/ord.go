@@ -16,6 +16,7 @@ const Prefix string = "ord"
 type Ordinal struct {
 	Data        []byte
 	ContentType string
+	Vout        uint8
 }
 
 // FromTape sets the ordinal data from a bpu.Tape
@@ -26,7 +27,7 @@ func (o *Ordinal) FromTape(tape *bpu.Tape) (err error) {
 	if len(ordScript) == minOrdScriptPushes {
 		prefix := ordScript[2].S
 		if prefix != nil && *prefix == "ord" {
-
+			o.Vout = tape.I
 			for idx, push := range ordScript {
 				if push.Op != nil && *push.Op == bscript.Op1 {
 					if ordScript[idx+1].S != nil {
@@ -45,18 +46,6 @@ func (o *Ordinal) FromTape(tape *bpu.Tape) (err error) {
 			}
 		}
 	}
-
-	// data := tape.Cell[9].B
-	// contentType := tape.Cell[11].S
-	// if data != nil && contentType != nil {
-	// 	var dataBytes []byte
-	// 	dataBytes, err = base64.StdEncoding.DecodeString(*data)
-	// 	if err != nil {
-	// 		return
-	// 	}
-	// 	o.Data = dataBytes
-	// 	o.ContentType = *contentType
-	// }
 	return
 }
 
