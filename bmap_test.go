@@ -12,6 +12,7 @@ import (
 	"github.com/bitcoinschema/go-bob"
 	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
+	"github.com/libsv/go-bt/v2"
 )
 
 var cryptofights = "cryptofights"
@@ -279,6 +280,42 @@ func TestNewOrdFromRawTxString(t *testing.T) {
 
 	if bMap.Ord[0].ContentType != "model/gltf-binary" {
 		t.Fatalf("expected: model/gltf-binary but got: %s", bMap.B[0].MediaType)
+	}
+
+}
+
+func TestHugeOrdFromRawTxString(t *testing.T) {
+	testHex := test.GetTestHex("./test/tx/c8cd6ff398d23e12e65ab065757fe6caf2d74b5e214b638365d61583030aa069.hex")
+	bobTx, err := bob.NewFromRawTxString(testHex)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+	var bMap *Tx
+	bMap, err = NewFromBob(bobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+
+	if bMap.Ord[0].ContentType != "image/png" {
+		t.Fatalf("expected: image/png but got: %s", bMap.B[0].MediaType)
+	}
+
+}
+func TestHugeOrdFromTx(t *testing.T) {
+	testHex := test.GetTestHex("./test/tx/c8cd6ff398d23e12e65ab065757fe6caf2d74b5e214b638365d61583030aa069.hex")
+	bobTx, err := bt.NewTxFromString(testHex)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+
+	var bMap *Tx
+	bMap, err = NewFromTx(bobTx)
+	if err != nil {
+		t.Fatalf("error occurred: %s", err.Error())
+	}
+
+	if bMap.Ord[0].ContentType != "image/png" {
+		t.Fatalf("expected: image/png but got: %s", bMap.B[0].MediaType)
 	}
 
 }
