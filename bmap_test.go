@@ -332,17 +332,21 @@ func TestHugeOrdFromRawTxString(t *testing.T) {
 }
 func TestHugeOrdFromTx(t *testing.T) {
 	testHex := test.GetTestHex("./test/tx/c8cd6ff398d23e12e65ab065757fe6caf2d74b5e214b638365d61583030aa069.hex")
-	bobTx, err := bt.NewTxFromString(testHex)
+	btTx, err := bt.NewTxFromString(testHex)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
 
 	var bMap *Tx
-	bMap, err = NewFromTx(bobTx)
+	bMap, err = NewFromTx(btTx)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
 
+	// dType := utils.GetDestinationType(btTx)
+	// if dType != utils.ScriptTypeNullData {
+	// 	t.Fatalf("expected: null data but got: %s", &dType)
+	// }
 	if bMap.Ord[0].ContentType != "image/png" {
 		t.Fatalf("expected: image/png but got: %s", bMap.B[0].MediaType)
 	}
@@ -391,7 +395,6 @@ func TestBadTape(t *testing.T) {
 	if bMap != nil {
 		t.Fatal("bmap tx was not nil", err)
 	}
-
 }
 
 func TestNewBoostFromRawTxString(t *testing.T) {

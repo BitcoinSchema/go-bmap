@@ -119,10 +119,9 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 					if ordOut, err = ord.NewFromTape(out.Tape[index]); err != nil {
 						return err
 					}
+					ordOut.Vout = uint8(len(t.Ord))
 					t.Ord = append(t.Ord, ordOut)
-
 				}
-
 			}
 		}
 

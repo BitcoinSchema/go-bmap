@@ -27,11 +27,12 @@ func (o *Ordinal) FromTape(tape *bpu.Tape) (err error) {
 	if len(ordScript) == minOrdScriptPushes {
 		prefix := ordScript[2].S
 		if prefix != nil && *prefix == "ord" {
-			o.Vout = tape.I
+
 			for idx, push := range ordScript {
 				if push.Op != nil && *push.Op == bscript.Op1 {
 					if ordScript[idx+1].S != nil {
 						o.ContentType = *ordScript[idx+1].S
+
 					}
 				}
 				if idx > 0 && push.Op != nil && *push.Op == bscript.Op0 && ordScript[idx+1].B != nil {
