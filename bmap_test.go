@@ -347,8 +347,11 @@ func TestHugeOrdFromTx(t *testing.T) {
 	// if dType != utils.ScriptTypeNullData {
 	// 	t.Fatalf("expected: null data but got: %s", &dType)
 	// }
+	if len(bMap.Ord) != 1436 {
+		t.Fatalf("expected: 1436 ord but got: %d", len(bMap.Ord))
+	}
 	if bMap.Ord[0].ContentType != "image/png" {
-		t.Fatalf("expected: image/png but got: %s", bMap.B[0].MediaType)
+		t.Fatalf("expected: image/png but got: %s", bMap.Ord[0].ContentType)
 	}
 
 }
