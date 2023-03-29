@@ -11,7 +11,7 @@ require (
 	github.com/bitcoinschema/go-boost v0.0.2
 	github.com/bitcoinschema/go-bpu v0.0.6
 	github.com/bitcoinschema/go-map v0.0.16
-	github.com/libsv/go-bt/v2 v2.1.1
+	github.com/libsv/go-bt/v2 v2.2.0
 )
 
 require (
