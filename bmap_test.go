@@ -15,7 +15,7 @@ import (
 	"github.com/libsv/go-bt/v2"
 )
 
-var cryptofights = "cryptofights"
+var cryptoFights = "cryptofights"
 var something = "something"
 var tpowStr = "tonicpow"
 
@@ -33,7 +33,7 @@ func TestFromBob(t *testing.T) {
 		t.Fatalf("error occurred: %s", err)
 	}
 
-	if bmapData.Tx.H != "ce7429a101b7aecdf1e5449151d0be17a3948cb5c22282832ae942107edb2272" {
+	if bmapData.Tx.Tx.H != "ce7429a101b7aecdf1e5449151d0be17a3948cb5c22282832ae942107edb2272" {
 		t.Fatalf("inherited field failed %+v", bmapData.MAP)
 	}
 
@@ -61,7 +61,7 @@ func TestFromTx(t *testing.T) {
 			t.Fatalf("error occurred: %s", err)
 		}
 
-		if bmapData.Tx.H != "1817ecc5b3207d9b33014b461688477146139105f198d69efadc73d05cfd3ed8" {
+		if bmapData.Tx.Tx.H != "1817ecc5b3207d9b33014b461688477146139105f198d69efadc73d05cfd3ed8" {
 			t.Fatalf("inherited field failed %+v", bmapData.MAP)
 		}
 
@@ -78,7 +78,7 @@ func TestFromTx(t *testing.T) {
 			t.Fatalf("error occurred: %s", err)
 		}
 
-		if bmapData.Tx.H != "a7ccc556170fbafb219990b031839197837fc2bd912928afcc513e0dbf62b54f" {
+		if bmapData.Tx.Tx.H != "a7ccc556170fbafb219990b031839197837fc2bd912928afcc513e0dbf62b54f" {
 			t.Fatalf("bmap tx id incorrect %+v", bmapData)
 		}
 
@@ -92,7 +92,6 @@ func TestFromTx(t *testing.T) {
 func TestMap(t *testing.T) {
 
 	keyName1 := "keyName1"
-	something := something
 	keyName2 := something
 	somethingElse := "something else"
 
@@ -117,12 +116,13 @@ func TestMap(t *testing.T) {
 }
 
 func TestMapFromRawTxString(t *testing.T) {
-	bob, err := bob.NewFromRawTxString(`01000000018952fe8892c429e69feb9b2dd9cd1f12ed757dc62e8d628b5a215f78ed895374020000006a47304402204784632fabca0f4aaa05dd6983633b2e8bf708d8766d0385f3393fff0623b88c02201a760e144116d47967501c2ea50dc231ae57c0eb78769d63713ce0648025c820412103221cb24c4e8b05a58bcf2ee8411f62e337c8099c8646babd47d0960899f69acaffffffff04680b0000000000001976a91409cc4559bdcb84cb35c107743f0dbb10d66679cc88ac0f720000000000001976a9146b1fe7b2063aa07766c764c0796fd4efd00340f288ac8a893b00000000001976a914be5f62df829ef754b8be09b37b04c4e7f9ff59d588ac0000000000000000ad006a223150755161374b36324d694b43747373534c4b79316b683536575755374d74555235035345540361707008746f6e6963706f7704747970650b6f666665725f636c69636b0f6f666665725f636f6e6669675f696403383038106f666665725f73657373696f6e5f6964403464303537386561643432393266653163643163393936643931623534613130653333653334623031396231386330613564353730376461346461346437653900000000`)
+	bTx, err := bob.NewFromRawTxString(`01000000018952fe8892c429e69feb9b2dd9cd1f12ed757dc62e8d628b5a215f78ed895374020000006a47304402204784632fabca0f4aaa05dd6983633b2e8bf708d8766d0385f3393fff0623b88c02201a760e144116d47967501c2ea50dc231ae57c0eb78769d63713ce0648025c820412103221cb24c4e8b05a58bcf2ee8411f62e337c8099c8646babd47d0960899f69acaffffffff04680b0000000000001976a91409cc4559bdcb84cb35c107743f0dbb10d66679cc88ac0f720000000000001976a9146b1fe7b2063aa07766c764c0796fd4efd00340f288ac8a893b00000000001976a914be5f62df829ef754b8be09b37b04c4e7f9ff59d588ac0000000000000000ad006a223150755161374b36324d694b43747373534c4b79316b683536575755374d74555235035345540361707008746f6e6963706f7704747970650b6f666665725f636c69636b0f6f666665725f636f6e6669675f696403383038106f666665725f73657373696f6e5f6964403464303537386561643432393266653163643163393936643931623534613130653333653334623031396231386330613564353730376461346461346437653900000000`)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
 	}
 
-	m, err := magic.NewFromTape(&bob.Out[3].Tape[1])
+	var m magic.MAP
+	m, err = magic.NewFromTape(&bTx.Out[3].Tape[1])
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
 	} else if m["CMD"] != "SET" && m["app"] != tpowStr {
@@ -161,12 +161,12 @@ func TestOrdFromTx(t *testing.T) {
 func TestRun(t *testing.T) {
 	r := "run"
 	zero5 := "05"
-	data := "{\"in\":5,\"ref\":[\"303ab9e7941ad08482f876a4501116c57a2f3eacf8608b3de235525daf81b357_o1\",\"c2c4c971e85b499c29a8ab2148fd324fe12b550b8f4f57658a4686e011d8fd58_o1\",\"cfa749424a1547a169d0b8fc0a54fed8918d2cf46eeea242fd2aebe3c8875a3c_o1\",\"a9082e00bbedfc80986c7821ed0b2a81dd34ad6bbd2a07fd9e5a06394614a957_o1\",\"705d8340b64e73fa9758e7f7799d28da38669fe0e2cb1ce1960abb1a6a26acf3_o1\",\"92f78b159c4e51ad52ed6d041d2253c2683d95d63a1568e3ce1e8ea516bfb962_o1\",\"08f34f29fd07850ca66973784362927523ea7940084fbd3690676b81628f8c07_o1\",\"d67bf5454d02dafcb4350e65899d890a0660e51442dc0c0f6f7b256a85d19eac_o1\",\"14e278c68ff521e0916ad7c713ae4a0156e76361dbd3b2b357dfb6028e0dca7a_o1\",\"01b37806b3ef4d45f0a73bfe10e916d4f280f9628569765e638259afeb15da16_o1\",\"918d80459b2469381fa493c10bb42d0cdca465170b9d8f88d7c85c55940b8bbc_o1\",\"a78f5a6d72f78711e66c6211fbbd0a0bfd15ad91bdd00404928a9facc63da6d9_o1\",\"74a9d9eddee3fada42489b9db04ef362043225d70799cbfa32a0fc425892ad31_o1\",\"3a67cec3c16bdb847b972bee2fc1c0717c59edcae7bf5f48c91feccfa635af33_o1\",\"382713c2b7abf570b1d344ebcf6b7896d8c5d8fd6362735c5fe72ed793829670_o1\"],\"out\":[\"e0eceb4e317aee7e68e39f22724bb6242c6b79e00483cb4b0250469235bb1ce8\",\"6720ce1b1eeb8401a4258aaab51be88f947744b935c9d7d7eed7c1e8306c8dd3\",\"dee4f6758363d2adfb614783305f6135c13f47772231dbb318d795c5d64d2fac\",\"add7d36d4ab36b1b2e922aa0a21500f3e1a89cd99b80a91acc75ffadd9ee248b\",\"fd86dc04c8a6657e3643a6eaa23892a89e87c481243effb3a22b8e118928e103\",\"df77a80e8a1a950a2cbf6dcc717a7ee461e741d8350edb6fb7aaa35fbf59036f\"],\"del\":[],\"cre\":[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\"],\"exec\":[{\"op\":\"NEW\",\"data\":[{\"$jig\":5},[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\",{\"allowBots\":true,\"fee\":0,\"lobby\":5,\"playerCount\":1,\"reward\":0,\"rulesId\":\"bot5\",\"tier\":3},[{\"fighter\":{\"$jig\":0},\"items\":[{\"$jig\":1},{\"$jig\":2},{\"$und\":1},{\"$jig\":3}],\"owner\":\"1Pm9cCc9RnZnAdqbKnXgqbeauRa5nfAejz\",\"pubkey\":\"038630f8220616856e7ebb73847643b4fe39fdcb4d7145b687ed1bb78340c77e08\",\"skills\":[{\"$jig\":7},{\"$jig\":8},{\"$jig\":9},{\"$jig\":10}],\"tags\":[],\"userId\":\"exgen\"},{\"coins\":[],\"fighter\":{\"$jig\":4},\"items\":[],\"pubkey\":\"02c74b8db80b5af8dc9fe14fdc098d3b7073184485471df9cf243330ae8da67a98\",\"skills\":[{\"$dup\":[\"1\",\"2\",\"0\",\"skills\",\"0\"]}],\"tags\":[\"bot\"],\"userId\":\"cryptofights\"}],\"14ad8af5a501229178217f8f85d698fef13ecaa56c80778cc9d9b1faade4030f\",1622457372560]]}]}"
+	data := "{\"in\":5,\"ref\":[\"303ab9e7941ad08482f876a4501116c57a2f3eacf8608b3de235525daf81b357_o1\",\"c2c4c971e85b499c29a8ab2148fd324fe12b550b8f4f57658a4686e011d8fd58_o1\",\"cfa749424a1547a169d0b8fc0a54fed8918d2cf46eeea242fd2aebe3c8875a3c_o1\",\"a9082e00bbedfc80986c7821ed0b2a81dd34ad6bbd2a07fd9e5a06394614a957_o1\",\"705d8340b64e73fa9758e7f7799d28da38669fe0e2cb1ce1960abb1a6a26acf3_o1\",\"92f78b159c4e51ad52ed6d041d2253c2683d95d63a1568e3ce1e8ea516bfb962_o1\",\"08f34f29fd07850ca66973784362927523ea7940084fbd3690676b81628f8c07_o1\",\"d67bf5454d02dafcb4350e65899d890a0660e51442dc0c0f6f7b256a85d19eac_o1\",\"14e278c68ff521e0916ad7c713ae4a0156e76361dbd3b2b357dfb6028e0dca7a_o1\",\"01b37806b3ef4d45f0a73bfe10e916d4f280f9628569765e638259afeb15da16_o1\",\"918d80459b2469381fa493c10bb42d0cdca465170b9d8f88d7c85c55940b8bbc_o1\",\"a78f5a6d72f78711e66c6211fbbd0a0bfd15ad91bdd00404928a9facc63da6d9_o1\",\"74a9d9eddee3fada42489b9db04ef362043225d70799cbfa32a0fc425892ad31_o1\",\"3a67cec3c16bdb847b972bee2fc1c0717c59edcae7bf5f48c91feccfa635af33_o1\",\"382713c2b7abf570b1d344ebcf6b7896d8c5d8fd6362735c5fe72ed793829670_o1\"],\"out\":[\"e0eceb4e317aee7e68e39f22724bb6242c6b79e00483cb4b0250469235bb1ce8\",\"6720ce1b1eeb8401a4258aaab51be88f947744b935c9d7d7eed7c1e8306c8dd3\",\"dee4f6758363d2adfb614783305f6135c13f47772231dbb318d795c5d64d2fac\",\"add7d36d4ab36b1b2e922aa0a21500f3e1a89cd99b80a91acc75ffadd9ee248b\",\"fd86dc04c8a6657e3643a6eaa23892a89e87c481243effb3a22b8e118928e103\",\"df77a80e8a1a950a2cbf6dcc717a7ee461e741d8350edb6fb7aaa35fbf59036f\"],\"del\":[],\"cre\":[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\"],\"exec\":[{\"op\":\"NEW\",\"data\":[{\"$jig\":5},[\"03107feff22788a1fc8357240bf450fd7bca4bd45d5f8bac63818c5a7b67b03876\",{\"allowBots\":true,\"fee\":0,\"lobby\":5,\"playerCount\":1,\"reward\":0,\"rulesId\":\"bot5\",\"tier\":3},[{\"fighter\":{\"$jig\":0},\"items\":[{\"$jig\":1},{\"$jig\":2},{\"$und\":1},{\"$jig\":3}],\"owner\":\"1Pm9cCc9RnZnAdqbKnXgqbeauRa5nfAejz\",\"pubkey\":\"038630f8220616856e7ebb73847643b4fe39fdcb4d7145b687ed1bb78340c77e08\",\"skills\":[{\"$jig\":7},{\"$jig\":8},{\"$jig\":9},{\"$jig\":10}],\"tags\":[],\"userId\":\"exgen\"},{\"coins\":[],\"fighter\":{\"$jig\":4},\"items\":[],\"pubkey\":\"02c74b8db80b5af8dc9fe14fdc098d3b7073184485471df9cf243330ae8da67a98\",\"skills\":[{\"$dup\":[\"1\",\"2\",\"0\",\"skills\",\"0\"]}],\"tags\":[\"bot\"],\"userId\":\"cryptoFights\"}],\"14ad8af5a501229178217f8f85d698fef13ecaa56c80778cc9d9b1faade4030f\",1622457372560]]}]}"
 	tape := bpu.Tape{
 		Cell: []bpu.Cell{
 			{S: &r},
 			{H: &zero5},
-			{S: &cryptofights},
+			{S: &cryptoFights},
 			{S: &data},
 		},
 	}
@@ -174,7 +174,7 @@ func TestRun(t *testing.T) {
 	runTx, err := run.NewFromTape(tape)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if runTx.AppID != cryptofights {
+	} else if runTx.AppID != cryptoFights {
 		t.Fatalf("Unexpected data %s %s", runTx.AppID, err)
 	}
 
@@ -192,7 +192,7 @@ func TestRunFromTx(t *testing.T) {
 	runTx, err := run.NewFromUtxo(tx.Outputs[0])
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if runTx.AppID != cryptofights {
+	} else if runTx.AppID != cryptoFights {
 		t.Fatalf("Unexpected data %s", runTx.AppID)
 	}
 
@@ -430,8 +430,8 @@ func TestBreakerFromRawTxString(t *testing.T) {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
 
-	if bMap.Tx.H != "b9c57c18677922e206325d03dabb566a3dfd5eaf674232c2b53554e7d5abe32b" {
-		t.Fatalf("expected: %s  but got: %s", "b9c57c18677922e206325d03dabb566a3dfd5eaf674232c2b53554e7d5abe32b", bMap.Tx.H)
+	if bMap.Tx.Tx.H != "b9c57c18677922e206325d03dabb566a3dfd5eaf674232c2b53554e7d5abe32b" {
+		t.Fatalf("expected: %s  but got: %s", "b9c57c18677922e206325d03dabb566a3dfd5eaf674232c2b53554e7d5abe32b", bMap.Tx.Tx.H)
 	}
 
 }
@@ -448,8 +448,8 @@ func TestBreaker3FromRawTxString(t *testing.T) {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
 
-	if bMap.Tx.H != "662104c5bb6a9e912f260795f5d770e670f0a966bc6fd89fe8c0e88fc78e8378" {
-		t.Fatalf("expected: %s  but got: %s", "662104c5bb6a9e912f260795f5d770e670f0a966bc6fd89fe8c0e88fc78e8378", bMap.Tx.H)
+	if bMap.Tx.Tx.H != "662104c5bb6a9e912f260795f5d770e670f0a966bc6fd89fe8c0e88fc78e8378" {
+		t.Fatalf("expected: %s  but got: %s", "662104c5bb6a9e912f260795f5d770e670f0a966bc6fd89fe8c0e88fc78e8378", bMap.Tx.Tx.H)
 	}
 
 	if bMap.Ord == nil {
@@ -469,8 +469,8 @@ func TestBreaker2FromRawTxString(t *testing.T) {
 		t.Fatalf("error occurred: %s", err.Error())
 	}
 
-	if bMap.Tx.H != "75a307aa68182d06a079fb2274a5ca439c1f5cc93f01fed3dd5dee6a407ba21c" {
-		t.Fatalf("expected: %s  but got: %s", "75a307aa68182d06a079fb2274a5ca439c1f5cc93f01fed3dd5dee6a407ba21c", bMap.Tx.H)
+	if bMap.Tx.Tx.H != "75a307aa68182d06a079fb2274a5ca439c1f5cc93f01fed3dd5dee6a407ba21c" {
+		t.Fatalf("expected: %s  but got: %s", "75a307aa68182d06a079fb2274a5ca439c1f5cc93f01fed3dd5dee6a407ba21c", bMap.Tx.Tx.H)
 	}
 
 }

@@ -16,7 +16,7 @@ import (
 
 // Tx is a Bmap formatted tx
 type Tx struct {
-	bpu.BpuTx
+	bpu.Tx
 	AIP   []*aip.Aip     `json:"AIP,omitempty" bson:"AIP,omitempty"`
 	B     []*b.B         `json:"B,omitempty" bson:"B,omitempty"`
 	BAP   []*bap.Bap     `json:"BAP,omitempty" bson:"BAP,omitempty"`
@@ -36,7 +36,7 @@ func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
 	return
 }
 
-// NewFromTx returns a new BmapTx from a a *bt.Tx
+// NewFromTx returns a new BmapTx from a *bt.Tx
 func NewFromTx(tx *bt.Tx) (bmapTx *Tx, err error) {
 	var bobTx *bob.Tx
 	if bobTx, err = bob.NewFromTx(tx); err != nil {
