@@ -1,16 +1,16 @@
 module github.com/bitcoinschema/go-bmap
 
-go 1.17
+go 1.18
 
 require (
-	github.com/bitcoinschema/go-aip v0.1.9
-	github.com/bitcoinschema/go-b v0.0.18
-	github.com/bitcoinschema/go-bap v0.2.8
+	github.com/bitcoinschema/go-aip v0.2.0
+	github.com/bitcoinschema/go-b v0.1.0
+	github.com/bitcoinschema/go-bap v0.3.0
 	github.com/bitcoinschema/go-bitcoin/v2 v2.0.3
-	github.com/bitcoinschema/go-bob v0.3.6
-	github.com/bitcoinschema/go-boost v0.0.2
-	github.com/bitcoinschema/go-bpu v0.0.8
-	github.com/bitcoinschema/go-map v0.0.17
+	github.com/bitcoinschema/go-bob v0.4.0
+	github.com/bitcoinschema/go-boost v0.1.0
+	github.com/bitcoinschema/go-bpu v0.1.0
+	github.com/bitcoinschema/go-map v0.1.0
 	github.com/libsv/go-bt/v2 v2.2.1
 )
 
@@ -22,5 +22,8 @@ require (
 	github.com/libsv/go-bk v0.1.6 // indirect
 	github.com/libsv/go-bt v1.0.8 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	golang.org/x/crypto v0.7.0 // indirect
+	golang.org/x/crypto v0.10.0 // indirect
 )
+
+// BAP has breaking changes upgrading to new version of AIP from sub packages BOB and BPU
+replace github.com/bitcoinschema/go-aip => github.com/bitcoinschema/go-aip v0.1.9
