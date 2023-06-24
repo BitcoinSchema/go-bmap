@@ -87,13 +87,10 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 	for i, op := range parts {
 		// Find OP_RETURN
 		if len(op) == 1 && op[0] == 0x6a {
-			fmt.Println("OP_RETURN FOUND")
+			// fmt.Println("OP_RETURN FOUND")
 			// Turn on collector
 			pos = i
 			continue
-		} else {
-			fmt.Println("WHATEVER FOUND")
-
 		}
 		// Collect data
 		if pos > 0 && i > pos {
@@ -110,7 +107,9 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 
 		switch i {
 		case 0:
-			log.Printf("Decoding run tx %+v", data)
+			if debug {
+				log.Printf("Decoding run tx %+v", data)
+			}
 			if string(val) != Prefix {
 				return nil, fmt.Errorf("not a valid run Tx: %w", err)
 			}
