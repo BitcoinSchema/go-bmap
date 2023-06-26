@@ -6,7 +6,7 @@ require (
 	github.com/bitcoinschema/go-aip v0.2.0
 	github.com/bitcoinschema/go-b v0.1.0
 	github.com/bitcoinschema/go-bap v0.3.0
-	github.com/bitcoinschema/go-bitcoin/v2 v2.0.3
+	github.com/bitcoinschema/go-bitcoin/v2 v2.0.4
 	github.com/bitcoinschema/go-bob v0.4.0
 	github.com/bitcoinschema/go-boost v0.1.0
 	github.com/bitcoinschema/go-bpu v0.1.0
