@@ -24,6 +24,3 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	golang.org/x/crypto v0.13.0 // indirect
 )
-
-// BAP has breaking changes upgrading to new version of AIP from sub packages BOB and BPU
-replace github.com/bitcoinschema/go-aip => github.com/bitcoinschema/go-aip v0.1.9
