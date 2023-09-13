@@ -2,8 +2,8 @@ github.com/bitcoinschema/go-aip v0.1.9 h1:BCzRMZhEviDfUZTnaxfTdy4JqdhkNZCN+PIV3J
 github.com/bitcoinschema/go-aip v0.1.9/go.mod h1:/x2uPdJIKBJpCRRiVQegn3ZyR2oX0Nr60/1hHP2kTZk=
 github.com/bitcoinschema/go-b v0.1.0 h1:PTDcTPWG9ulnn3e1N2ZzGMBbVBRw37/Sj1Ln87JtM2s=
 github.com/bitcoinschema/go-b v0.1.0/go.mod h1:bNwqyJJiCkxdfwrzEHK4KUHkFM3IkFf4abWnDlk2C3Y=
-github.com/bitcoinschema/go-bap v0.3.0 h1:wB+2UdopLVoXfG1L4ThvCa35CvZ1KoEtFSBjnFkL8Fk=
-github.com/bitcoinschema/go-bap v0.3.0/go.mod h1:yESlmHUyJaZTTVuVqYTBMzFloE9Ydb0O5229J0VRabc=
+github.com/bitcoinschema/go-bap v0.3.1 h1:XMeiX4ykBNp5CBo8OiIfvbMqP6usjyHeoDHmIsfoI/Q=
+github.com/bitcoinschema/go-bap v0.3.1/go.mod h1:ux4X27kloP3LqHM4314aOLV1NvVSM1n1COWCVz2Idf0=
 github.com/bitcoinschema/go-bitcoin v0.3.20 h1:jWKT7ePYm4dPaIR2aIAVL8BwdsYtuG/4B87l1+KZyWs=
 github.com/bitcoinschema/go-bitcoin v0.3.20/go.mod h1:HyyMGUTtGE1qOgFJzCmvgsf3y55IfxJ+qLbwRm4Ski4=
 github.com/bitcoinschema/go-bitcoin/v2 v2.0.2/go.mod h1:W27VU8elCcugGuA1pvhMQ4PjMPBRirdovkgoeKTjLg0=
