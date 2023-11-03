@@ -441,3 +441,22 @@ func TestBreaker2FromRawTxString(t *testing.T) {
 	}
 
 }
+
+// TODO: make this test pass
+// func TestBreaker4FromRawTxString(t *testing.T) {
+// 	testHex := test.GetTestHex("./test/tx/870f7abb189530ea475bcd87c599ad9370fd8d8be290e20ad0548af6de4bb8df.hex")
+// 	bobTx, err := bob.NewFromRawTxString(testHex)
+// 	if err != nil {
+// 		t.Fatalf("error occurred: %s", err.Error())
+// 	}
+// 	var bMap *Tx
+// 	bMap, err = NewFromBob(bobTx)
+// 	if err != nil {
+// 		t.Fatalf("error occurred: %s", err.Error())
+// 	}
+
+// 	if bMap.Tx.Tx.H != "870f7abb189530ea475bcd87c599ad9370fd8d8be290e20ad0548af6de4bb8df" {
+// 		t.Fatalf("expected: %s  but got: %s", "870f7abb189530ea475bcd87c599ad9370fd8d8be290e20ad0548af6de4bb8df", bMap.Tx.Tx.H)
+// 	}
+
+// }
