@@ -16,8 +16,8 @@ github.com/bitcoinschema/go-bpu v0.1.3 h1:O7SvuptH4Q7hemD6G9OotPLINZ61CAVOgWKJWK
 github.com/bitcoinschema/go-bpu v0.1.3/go.mod h1:y4ZEDC0fSYRrA6N6bzKwHXdtMrRiQhpurpkTVobz07I=
 github.com/bitcoinschema/go-map v0.1.0 h1:dM8OJ/E5MnEm9m1xNI/B3msCgSI9s7Ps3Vk0BFP53eI=
 github.com/bitcoinschema/go-map v0.1.0/go.mod h1:36YXG/kob/Z+tCK3EpHMdN9+ADMSDMPYA7JFuPOBi3M=
-github.com/bitcoinschema/go-sigma v0.0.1 h1:OXaegdeX6hAFJukwZE5NDreXQo/x+IPHHgOu5rDAjOQ=
-github.com/bitcoinschema/go-sigma v0.0.1/go.mod h1:3px6UHMLIYVBmH0CTi75GzOZFEFh1mTTQ/9aL+gCHmY=
+github.com/bitcoinschema/go-sigma v0.0.2 h1:4okeV6JeAm/5CKSdmWzENMVVTGq8ZI/Yx3ogG+AqUVc=
+github.com/bitcoinschema/go-sigma v0.0.2/go.mod h1:uq5j6hPNQ/SlR0xjxCm29G/yEid+tbYpnbpYzqHFG/o=
 github.com/bitcoinsv/bsvd v0.0.0-20190609155523-4c29707f7173 h1:2yTIV9u7H0BhRDGXH5xrAwAz7XibWJtX2dNezMeNsUo=
 github.com/bitcoinsv/bsvd v0.0.0-20190609155523-4c29707f7173/go.mod h1:BZ1UcC9+tmcDEcdVXgpt13hMczwJxWzpAn68wNs7zRA=
 github.com/bitcoinsv/bsvlog v0.0.0-20181216181007-cb81b076bf2e h1:6f+gRvaPE/4h0g39dqTNPr9/P4mikw0aB+dhiExaWN8=
@@ -42,7 +42,6 @@ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
-github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20201208171446-5f87f3452ae9/go.mod h1:jdWPYTVW3xRLrWPugEBEK3UY2ZEsg3UU495nc5E+M+I=
 golang.org/x/crypto v0.0.0-20211209193657-4570a0811e8b/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
@@ -63,4 +62,3 @@ golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGm
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
-gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
