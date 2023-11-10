@@ -11,6 +11,7 @@ import (
 	"github.com/bitcoinschema/go-boost"
 	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
+	"github.com/bitcoinschema/go-sigma"
 	"github.com/libsv/go-bt/v2"
 )
 
@@ -24,6 +25,7 @@ type Tx struct {
 	MAP   []magic.MAP    `json:"MAP,omitempty" bson:"MAP,omitempty"`
 	Run   []*run.Jig     `json:"Run,omitempty" bson:"Run,omitempty"`
 	Ord   []*ord.Ordinal `json:"Ord,omitempty" bson:"Ord,omitempty"`
+	Sigma []*sigma.Sig   `json:"Sigma,omitempty" bson:"Sigma,omitempty"`
 }
 
 // NewFromBob returns a new BmapTx from a BobTx
@@ -62,7 +64,7 @@ func NewFromRawTxString(tx string) (bmapTx *Tx, err error) {
 
 // FromBob returns a BmapTx from a BobTx
 func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
-	for _, out := range bobTx.Out {
+	for vout, out := range bobTx.Out {
 		for index, tape := range out.Tape {
 			// Handle string prefixes
 			if len(tape.Cell) > 0 && tape.Cell[0].S != nil {
@@ -107,6 +109,10 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 						return err
 					}
 					t.B = append(t.B, bOut)
+					continue
+				case sigma.Prefix:
+					sigOut := sigma.NewSigFromTape(out.Tape[index], vout)
+					t.Sigma = append(t.Sigma, sigOut)
 					continue
 				}
 			}

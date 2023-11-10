@@ -16,6 +16,8 @@ github.com/bitcoinschema/go-bpu v0.1.3 h1:O7SvuptH4Q7hemD6G9OotPLINZ61CAVOgWKJWK
 github.com/bitcoinschema/go-bpu v0.1.3/go.mod h1:y4ZEDC0fSYRrA6N6bzKwHXdtMrRiQhpurpkTVobz07I=
 github.com/bitcoinschema/go-map v0.1.0 h1:dM8OJ/E5MnEm9m1xNI/B3msCgSI9s7Ps3Vk0BFP53eI=
 github.com/bitcoinschema/go-map v0.1.0/go.mod h1:36YXG/kob/Z+tCK3EpHMdN9+ADMSDMPYA7JFuPOBi3M=
+github.com/bitcoinschema/go-sigma v0.0.2 h1:4okeV6JeAm/5CKSdmWzENMVVTGq8ZI/Yx3ogG+AqUVc=
+github.com/bitcoinschema/go-sigma v0.0.2/go.mod h1:uq5j6hPNQ/SlR0xjxCm29G/yEid+tbYpnbpYzqHFG/o=
 github.com/bitcoinsv/bsvd v0.0.0-20190609155523-4c29707f7173 h1:2yTIV9u7H0BhRDGXH5xrAwAz7XibWJtX2dNezMeNsUo=
 github.com/bitcoinsv/bsvd v0.0.0-20190609155523-4c29707f7173/go.mod h1:BZ1UcC9+tmcDEcdVXgpt13hMczwJxWzpAn68wNs7zRA=
 github.com/bitcoinsv/bsvlog v0.0.0-20181216181007-cb81b076bf2e h1:6f+gRvaPE/4h0g39dqTNPr9/P4mikw0aB+dhiExaWN8=
