@@ -1,6 +1,6 @@
 module github.com/bitcoinschema/go-bmap
 
-go 1.18
+go 1.21.3
 
 require (
 	github.com/bitcoinschema/go-aip v0.2.0
@@ -11,6 +11,7 @@ require (
 	github.com/bitcoinschema/go-boost v0.1.0
 	github.com/bitcoinschema/go-bpu v0.1.3
 	github.com/bitcoinschema/go-map v0.1.0
+	github.com/bitcoinschema/go-sigma v0.0.0-00010101000000-000000000000
 	github.com/libsv/go-bt/v2 v2.2.5
 )
 
