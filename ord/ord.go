@@ -67,7 +67,7 @@ func ScriptFromTape(tape bpu.Tape) (ordScript []bpu.Cell) {
 	endIdx := 0
 	// Find OP_IF and OP_ENDIF indexes
 	for idx, c := range tape.Cell {
-		if idx > 0 && c.Ops != nil && *c.Ops == "OP_IF" && *tape.Cell[idx-1].Op == 0 {
+		if idx > 0 && c.Ops != nil && *c.Ops == "OP_IF" && tape.Cell[idx-1].Op != nil && *tape.Cell[idx-1].Op == 0 {
 			startIdx = idx - 1
 		}
 
