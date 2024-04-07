@@ -73,7 +73,11 @@ func ScriptFromTape(tape bpu.Tape) (ordScript []bpu.Cell) {
 
 		if startIdx > 0 && c.Ops != nil && *c.Ops == "OP_ENDIF" {
 			endIdx = idx
+			break
 		}
+	}
+	if startIdx > endIdx {
+		return []bpu.Cell{}
 	}
 	return tape.Cell[startIdx:endIdx]
 }
