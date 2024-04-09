@@ -3,14 +3,14 @@ module github.com/bitcoinschema/go-bmap
 go 1.18
 
 require (
-	github.com/bitcoinschema/go-aip v0.2.0
-	github.com/bitcoinschema/go-b v0.1.0
+	github.com/bitcoinschema/go-aip v0.2.1
+	github.com/bitcoinschema/go-b v0.1.1
 	github.com/bitcoinschema/go-bap v0.3.2
 	github.com/bitcoinschema/go-bitcoin/v2 v2.0.5
 	github.com/bitcoinschema/go-bob v0.4.3
 	github.com/bitcoinschema/go-boost v0.1.0
 	github.com/bitcoinschema/go-bpu v0.1.3
-	github.com/bitcoinschema/go-map v0.1.0
+	github.com/bitcoinschema/go-map v0.1.1
 	github.com/bitcoinschema/go-sigma v0.0.2
 	github.com/libsv/go-bt/v2 v2.2.5
 )
@@ -23,5 +23,5 @@ require (
 	github.com/libsv/go-bk v0.1.6 // indirect
 	github.com/libsv/go-bt v1.0.8 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	golang.org/x/crypto v0.17.0 // indirect
+	golang.org/x/crypto v0.22.0 // indirect
 )
