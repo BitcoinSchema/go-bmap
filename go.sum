@@ -2,8 +2,8 @@ github.com/bitcoinschema/go-aip v0.2.2 h1:ST1M/e9B532stKWhFxSCGLI4w+jj1WFdRmgCae
 github.com/bitcoinschema/go-aip v0.2.2/go.mod h1:LvY6cDwkuXbTGfoZ8YlCj47Yn2Qy79SXxsWa1DUIM88=
 github.com/bitcoinschema/go-b v0.1.1 h1:FLVmGPL8gQBpRC4FI7IUDceMTPLmh1Km+Dbx+86ofOA=
 github.com/bitcoinschema/go-b v0.1.1/go.mod h1:723WYI1ymRe+h7PLlypQU4aNzrZ0/cw0AY/am4av4MM=
-github.com/bitcoinschema/go-bap v0.3.2 h1:Ej3xD6Ev/onGi0rqvcOJA62vKcAqYghE/7ZMO0Rj2J0=
-github.com/bitcoinschema/go-bap v0.3.2/go.mod h1:ux4X27kloP3LqHM4314aOLV1NvVSM1n1COWCVz2Idf0=
+github.com/bitcoinschema/go-bap v0.3.3 h1:ijjTmA6E88HjuGtYeu/1Ol/Dx9B97tIZUNzgvpAnF1o=
+github.com/bitcoinschema/go-bap v0.3.3/go.mod h1:znl2NrbioVlzY9GuQDN+zQlFqD8rdFkW17bGDkaRHL0=
 github.com/bitcoinschema/go-bitcoin v0.3.20 h1:jWKT7ePYm4dPaIR2aIAVL8BwdsYtuG/4B87l1+KZyWs=
 github.com/bitcoinschema/go-bitcoin v0.3.20/go.mod h1:HyyMGUTtGE1qOgFJzCmvgsf3y55IfxJ+qLbwRm4Ski4=
 github.com/bitcoinschema/go-bitcoin/v2 v2.0.5 h1:Sgh5Eb746Zck/46rFDrZZEXZWyO53fMuWYhNoZa1tck=
@@ -45,8 +45,8 @@ github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcU
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20201208171446-5f87f3452ae9/go.mod h1:jdWPYTVW3xRLrWPugEBEK3UY2ZEsg3UU495nc5E+M+I=
 golang.org/x/crypto v0.0.0-20211209193657-4570a0811e8b/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
-golang.org/x/crypto v0.22.0 h1:g1v0xeRhjcugydODzvb3mEM9SQ0HGp9s/nh3COQ/C30=
-golang.org/x/crypto v0.22.0/go.mod h1:vr6Su+7cTlO45qkww3VDJlzDn0ctJvRgYbC2NvXHt+M=
+golang.org/x/crypto v0.24.0 h1:mnl8DM0o513X8fdIkmyFE/5hTYxbwYOjDS/+rK6qpRI=
+golang.org/x/crypto v0.24.0/go.mod h1:Z1PMYSOR5nyMcyAVAIQSKCDwalqy85Aqn1x3Ws4L5DM=
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
