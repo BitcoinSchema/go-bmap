@@ -3,7 +3,7 @@ module github.com/bitcoinschema/go-bmap
 go 1.18
 
 require (
-	github.com/bitcoinschema/go-aip v0.2.2
+	github.com/bitcoinschema/go-aip v0.2.3
 	github.com/bitcoinschema/go-b v0.1.1
 	github.com/bitcoinschema/go-bap v0.3.3
 	github.com/bitcoinschema/go-bitcoin/v2 v2.0.5

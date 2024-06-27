@@ -1,5 +1,7 @@
 github.com/bitcoinschema/go-aip v0.2.2 h1:ST1M/e9B532stKWhFxSCGLI4w+jj1WFdRmgCaeE1sZI=
 github.com/bitcoinschema/go-aip v0.2.2/go.mod h1:LvY6cDwkuXbTGfoZ8YlCj47Yn2Qy79SXxsWa1DUIM88=
+github.com/bitcoinschema/go-aip v0.2.3 h1:Kqb8LxMOssHOSRygT85iZBQCIXcUCCMThoTB/KZLCm0=
+github.com/bitcoinschema/go-aip v0.2.3/go.mod h1:LvY6cDwkuXbTGfoZ8YlCj47Yn2Qy79SXxsWa1DUIM88=
 github.com/bitcoinschema/go-b v0.1.1 h1:FLVmGPL8gQBpRC4FI7IUDceMTPLmh1Km+Dbx+86ofOA=
 github.com/bitcoinschema/go-b v0.1.1/go.mod h1:723WYI1ymRe+h7PLlypQU4aNzrZ0/cw0AY/am4av4MM=
 github.com/bitcoinschema/go-bap v0.3.3 h1:ijjTmA6E88HjuGtYeu/1Ol/Dx9B97tIZUNzgvpAnF1o=
