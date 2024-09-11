@@ -2,6 +2,7 @@
 package bmap
 
 import (
+	"github.com/bitcoin-sv/go-sdk/transaction"
 	"github.com/bitcoinschema/go-aip"
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
@@ -12,7 +13,6 @@ import (
 	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
 	"github.com/bitcoinschema/go-sigma"
-	"github.com/libsv/go-bt/v2"
 )
 
 // Tx is a Bmap formatted tx
@@ -39,7 +39,7 @@ func NewFromBob(bobTx *bob.Tx) (bmapTx *Tx, err error) {
 }
 
 // NewFromTx returns a new BmapTx from a *bt.Tx
-func NewFromTx(tx *bt.Tx) (bmapTx *Tx, err error) {
+func NewFromTx(tx *transaction.Transaction) (bmapTx *Tx, err error) {
 	var bobTx *bob.Tx
 	if bobTx, err = bob.NewFromTx(tx); err != nil {
 		return

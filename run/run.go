@@ -8,9 +8,9 @@ import (
 	"os"
 	"strings"
 
+	"github.com/bitcoin-sv/go-sdk/script"
+	"github.com/bitcoin-sv/go-sdk/transaction"
 	"github.com/bitcoinschema/go-bpu"
-	"github.com/libsv/go-bt/v2"
-	"github.com/libsv/go-bt/v2/bscript"
 )
 
 var debug = os.Getenv("BMAP_DEBUG") == "1"
@@ -64,21 +64,14 @@ type Jig struct {
 }
 
 // NewFromUtxo returns a Jig from a bt.Output
-func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
+func NewFromUtxo(utxo *transaction.TransactionOutput) (jig *Jig, e error) {
 
 	jig = &Jig{}
 	lockingScript := *utxo.LockingScript
-	parts, err := bscript.DecodeParts(lockingScript)
+	parts, err := script.DecodeScript(lockingScript)
 	if err != nil {
 		return nil, err
 	}
-
-	// script, err := utxo.LockingScript.ToASM()
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// scriptParts := strings.Split(script, " ")
 
 	// Collect OP_RETURN data from script
 	var pos = 0
@@ -86,7 +79,7 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 
 	for i, op := range parts {
 		// Find OP_RETURN
-		if len(op) == 1 && op[0] == 0x6a {
+		if op.Op == 0x6a {
 			// fmt.Println("OP_RETURN FOUND")
 			// Turn on collector
 			pos = i
@@ -94,7 +87,11 @@ func NewFromUtxo(utxo *bt.Output) (jig *Jig, e error) {
 		}
 		// Collect data
 		if pos > 0 && i > pos {
-			data = append(data, op)
+			if op.Op > 0 && op.Op <= script.OpPUSHDATA4 {
+				data = append(data, op.Data)
+			} else {
+				data = append(data, []byte{op.Op})
+			}
 		}
 	}
 

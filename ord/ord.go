@@ -6,7 +6,8 @@ import (
 	"log"
 
 	"github.com/bitcoinschema/go-bpu"
-	"github.com/libsv/go-bt/v2/bscript"
+
+	"github.com/bitcoin-sv/go-sdk/script"
 )
 
 // Prefix is the OP_RETURN prefix for the 1Sat Ordinals inscription protocol
@@ -29,13 +30,13 @@ func (o *Ordinal) FromTape(tape *bpu.Tape) (err error) {
 		if prefix != nil && *prefix == "ord" {
 
 			for idx, push := range ordScript {
-				if push.Op != nil && *push.Op == bscript.Op1 {
+				if push.Op != nil && *push.Op == script.Op1 {
 					if ordScript[idx+1].S != nil {
 						o.ContentType = *ordScript[idx+1].S
 
 					}
 				}
-				if idx > 0 && push.Op != nil && *push.Op == bscript.Op0 && ordScript[idx+1].B != nil {
+				if idx > 0 && push.Op != nil && *push.Op == script.Op0 && ordScript[idx+1].B != nil {
 					data, err := base64.StdEncoding.DecodeString(*ordScript[idx+1].B)
 					if err != nil {
 						log.Fatal("error:", err)
