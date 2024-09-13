@@ -5,9 +5,8 @@ import (
 	"encoding/base64"
 	"log"
 
-	"github.com/bitcoinschema/go-bpu"
-
 	"github.com/bitcoin-sv/go-sdk/script"
+	"github.com/bitcoinschema/go-bpu"
 )
 
 // Prefix is the OP_RETURN prefix for the 1Sat Ordinals inscription protocol
@@ -15,9 +14,9 @@ const Prefix string = "ord"
 
 // Ordinal tells wether an inscription is found
 type Ordinal struct {
-	Data        []byte
-	ContentType string
-	Vout        uint8
+	Data        []byte `json:"data"`
+	ContentType string `json:"contentType"`
+	Vout        uint8  `json:"vout"`
 }
 
 // FromTape sets the ordinal data from a bpu.Tape

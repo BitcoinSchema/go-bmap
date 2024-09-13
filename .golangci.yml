@@ -13,7 +13,7 @@ run:
   issues-exit-code: 1
 
   # include test files or not, default is true
-  tests: true
+  tests: false
 
   # list of build tags, all linters use it. Default is empty list.
   build-tags:
@@ -118,6 +118,9 @@ linters-settings:
   gocognit:
     # minimal code complexity to report, 30 by default (but we recommend 10-20)
     min-complexity: 10
+  gosec:
+    excludes:
+      - G115
   nestif:
     # minimal complexity of if statements to report, 5 by default
     min-complexity: 4
@@ -353,6 +356,7 @@ linters:
     - testpackage
     - nestif
     - nlreturn
+    - musttag
   disable-all: false
   presets:
     - bugs

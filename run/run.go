@@ -58,9 +58,9 @@ type Payload struct {
 
 // Jig is a RunOnBitcoin object
 type Jig struct {
-	AppID   string
-	Version uint64
-	Payload Payload // not sure what data format is actually best for this
+	AppID   string  `json:"app_id"`
+	Version uint64  `json:"version"`
+	Payload Payload `json:"payload"`
 }
 
 // NewFromUtxo returns a Jig from a bt.Output
