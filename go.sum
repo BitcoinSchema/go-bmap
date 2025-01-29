@@ -8,8 +8,8 @@ github.com/bitcoinschema/go-bap v0.4.1 h1:t5SwpkW1oCvpn4+7nTp3W57hnaQJrgNxZNRNDM
 github.com/bitcoinschema/go-bap v0.4.1/go.mod h1:M5DJ8L4nT7VY1VwV2qwaScgYboh4Jmw5Wx22osoNGko=
 github.com/bitcoinschema/go-bob v0.5.1 h1:pvRX16sAkQRRNBu1UpRnrbd/WX9MKwYEh0LRb7/u9FI=
 github.com/bitcoinschema/go-bob v0.5.1/go.mod h1:z/et0FNbSJobzmU6cQYjByGFNcUfRwgSsqKR9uJOg9k=
-github.com/bitcoinschema/go-boost v0.2.0 h1:ygps3vl2JgWBIaYRHXNzdHRESU2OggTV4SHqoTuQo5E=
-github.com/bitcoinschema/go-boost v0.2.0/go.mod h1:sHEZJXUtX+mmKl06Ma91fBOfMqM+L9NJ1Sph2CztGNc=
+github.com/bitcoinschema/go-boost v0.2.1 h1:y0asMfmrbSxdabgEpJ6h3LHncsy2k2B+AcVnqI54zec=
+github.com/bitcoinschema/go-boost v0.2.1/go.mod h1:YxG4CWf/YC9iVTdHwA3iucnLqdZMKUX2kOI61SSDYCw=
 github.com/bitcoinschema/go-bpu v0.2.1 h1:4p4LKa+BtP4Ahv5wFbt/RuQbob3u37CrBSuD1aruSQ0=
 github.com/bitcoinschema/go-bpu v0.2.1/go.mod h1:WhXazKw2p4OIKhkd5A9JgDsaq3a7QRPmqzwCb/835uA=
 github.com/bitcoinschema/go-map v0.2.1 h1:+MkeiEEWC2DaSacc+1HlrQM4+rkB9Ik1vNkRtvdUg54=

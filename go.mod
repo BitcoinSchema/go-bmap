@@ -8,7 +8,7 @@ require (
 	github.com/bitcoinschema/go-b v0.2.1
 	github.com/bitcoinschema/go-bap v0.4.1
 	github.com/bitcoinschema/go-bob v0.5.1
-	github.com/bitcoinschema/go-boost v0.2.0
+	github.com/bitcoinschema/go-boost v0.2.1
 	github.com/bitcoinschema/go-bpu v0.2.1
 	github.com/bitcoinschema/go-map v0.2.1
 	github.com/bitcoinschema/go-sigma v0.1.1
