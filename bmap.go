@@ -64,6 +64,7 @@ func NewFromRawTxString(tx string) (bmapTx *Tx, err error) {
 
 // FromBob returns a BmapTx from a BobTx
 func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
+	aipCount := 0
 	for vout, out := range bobTx.Out {
 		for index, tape := range out.Tape {
 			// Handle string prefixes
@@ -79,7 +80,8 @@ func (t *Tx) FromBob(bobTx *bob.Tx) (err error) {
 					continue
 				case aip.Prefix:
 					aipOut := aip.NewFromTape(tape)
-					aipOut.SetDataFromTapes(out.Tape)
+					aipOut.SetDataFromTapes(out.Tape, aipCount)
+					aipCount++
 					t.AIP = append(t.AIP, aipOut)
 					continue
 				case bap.Prefix:

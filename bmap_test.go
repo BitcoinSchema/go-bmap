@@ -1,6 +1,7 @@
 package bmap
 
 import (
+	"encoding/base64"
 	"testing"
 
 	"github.com/bitcoin-sv/go-sdk/transaction"
@@ -205,10 +206,11 @@ func TestB(t *testing.T) {
 	mimeType := "text/plain"
 	encoding := "utf8"
 	prefix := b.Prefix
+	encoded := base64.StdEncoding.EncodeToString([]byte(helloWorld))
 	tape := bpu.Tape{
 		Cell: []bpu.Cell{
 			{S: &prefix},
-			{S: &helloWorld},
+			{B: &encoded},
 			{S: &mimeType},
 			{S: &encoding},
 		},
@@ -216,8 +218,8 @@ func TestB(t *testing.T) {
 	bTx, err := b.NewFromTape(tape)
 	if err != nil {
 		t.Fatalf("error occurred: %s", err)
-	} else if bTx.Data.UTF8 != "Hello world" {
-		t.Fatalf("Unexpected data %s %s", bTx.Data.UTF8, err)
+	} else if string(bTx.Data) != "Hello world" {
+		t.Fatalf("Unexpected data %s %s", string(bTx.Data), err)
 	}
 }
 
