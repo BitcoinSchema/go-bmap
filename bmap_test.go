@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"testing"
 
-	"github.com/bitcoin-sv/go-sdk/transaction"
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
 	"github.com/bitcoinschema/go-bmap/run"
@@ -12,6 +11,7 @@ import (
 	"github.com/bitcoinschema/go-bob"
 	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
+	"github.com/bsv-blockchain/go-sdk/transaction"
 )
 
 var cryptoFights = "cryptofights"

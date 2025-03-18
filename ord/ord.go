@@ -5,8 +5,8 @@ import (
 	"encoding/base64"
 	"log"
 
-	"github.com/bitcoin-sv/go-sdk/script"
 	"github.com/bitcoinschema/go-bpu"
+	"github.com/bsv-blockchain/go-sdk/script"
 )
 
 // Prefix is the OP_RETURN prefix for the 1Sat Ordinals inscription protocol

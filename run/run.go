@@ -8,9 +8,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bitcoin-sv/go-sdk/script"
-	"github.com/bitcoin-sv/go-sdk/transaction"
 	"github.com/bitcoinschema/go-bpu"
+	"github.com/bsv-blockchain/go-sdk/script"
+	"github.com/bsv-blockchain/go-sdk/transaction"
 )
 
 var debug = os.Getenv("BMAP_DEBUG") == "1"

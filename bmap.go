@@ -2,7 +2,6 @@
 package bmap
 
 import (
-	"github.com/bitcoin-sv/go-sdk/transaction"
 	"github.com/bitcoinschema/go-aip"
 	"github.com/bitcoinschema/go-b"
 	"github.com/bitcoinschema/go-bap"
@@ -13,6 +12,7 @@ import (
 	"github.com/bitcoinschema/go-bpu"
 	magic "github.com/bitcoinschema/go-map"
 	"github.com/bitcoinschema/go-sigma"
+	"github.com/bsv-blockchain/go-sdk/transaction"
 )
 
 // Tx is a Bmap formatted tx
