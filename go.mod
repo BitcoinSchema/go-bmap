@@ -11,7 +11,7 @@ require (
 	github.com/bitcoinschema/go-bpu v0.2.2
 	github.com/bitcoinschema/go-map v0.2.2
 	github.com/bitcoinschema/go-sigma v0.1.2
-	github.com/bsv-blockchain/go-sdk v1.1.22
+	github.com/bsv-blockchain/go-sdk v1.1.26
 )
 
 require (
