@@ -68,7 +68,7 @@ func NewFromUtxo(utxo *transaction.TransactionOutput) (jig *Jig, e error) {
 
 	jig = &Jig{}
 	lockingScript := *utxo.LockingScript
-	parts, err := script.DecodeScript(lockingScript)
+	parts, err := script.DecodeScript(lockingScript, script.DecodeOptionsParseOpReturn)
 	if err != nil {
 		return nil, err
 	}
